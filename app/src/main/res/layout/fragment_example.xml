@@ -1,95 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:background="#FFFFFF"
 		android:gravity="center"
-		android:orientation="vertical"
-		android:padding="@dimen/spacing_large">
+		android:orientation="vertical">
 
-		<TextView
-			android:id="@+id/title"
+		<ImageView
+			android:id="@+id/imageView7"
+			app:layout_constraintTop_toTopOf="parent"
+			android:layout_width="match_parent"
+			android:layout_height="200dp"
+			android:adjustViewBounds="true"
+			android:background="@drawable/login_cover"
+			android:scaleType="centerCrop"
+			android:src="@drawable/gradient" />
+
+		<ImageView
+			android:id="@+id/imageView3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/example_title"
-			android:textSize="@dimen/font_medium_extra"
-			app:layout_constraintBottom_toTopOf="@id/usernameInput"
+			android:layout_marginTop="120dp"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"
-			app:layout_constraintVertical_bias="0" />
+			app:layout_constraintTop_toTopOf="@+id/imageView7"
+			app:srcCompat="@drawable/wolox_logo_large" />
 
 		<EditText
-			android:id="@+id/usernameInput"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="@dimen/spacing_large_extra"
-			android:layout_marginRight="@dimen/spacing_large_extra"
+			android:id="@+id/email_login"
+			android:layout_width="361dp"
+			android:layout_height="70dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="20dp"
+			android:layout_marginEnd="16dp"
 			android:gravity="center"
-			android:hint="@string/fragment_example_username"
-			android:inputType="text"
+			android:hint="@string/login_screen_email_hint"
+			android:inputType="textEmailAddress"
 			android:maxLines="1"
-			app:layout_constraintBottom_toTopOf="@id/favouriteColorInput"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"
-			app:layout_constraintVertical_chainStyle="packed" />
+			app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
 		<EditText
-			android:id="@+id/favouriteColorInput"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="@dimen/spacing_large_extra"
-			android:layout_marginTop="@dimen/spacing_large"
-			android:layout_marginRight="@dimen/spacing_large_extra"
+			android:id="@+id/password"
+			android:layout_width="365dp"
+			android:layout_height="57dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="16dp"
+			android:layout_marginEnd="16dp"
 			android:gravity="center"
-			android:hint="@string/fragment_example_favourite_color"
+			android:hint="@string/login_screen_password_hint"
 			android:inputType="text"
 			android:maxLines="1"
-			app:layout_constraintBottom_toTopOf="@id/loginButton"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/usernameInput" />
+			app:layout_constraintTop_toBottomOf="@+id/email_login" />
 
 		<Button
 			android:id="@+id/loginButton"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/spacing_large"
-			android:text="@string/fragment_example_login"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="@id/favouriteColorInput"
-			app:layout_constraintStart_toStartOf="@id/favouriteColorInput"
-			app:layout_constraintTop_toBottomOf="@id/favouriteColorInput" />
-
-		<TextView
-			android:id="@+id/woloxLink"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:gravity="bottom|center_horizontal"
-			android:text="@string/example_wolox"
-			android:textSize="@dimen/font_medium_extra"
-			app:layout_constraintBottom_toTopOf="@id/woloxPhone"
+			android:layout_width="333dp"
+			android:layout_height="60dp"
+			android:layout_marginTop="40dp"
+			android:text="@string/login_screen_login_button"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/loginButton"
-			app:layout_constraintVertical_bias="1"
-			app:layout_constraintVertical_chainStyle="packed" />
+			app:layout_constraintTop_toBottomOf="@+id/password" />
 
 		<TextView
-			android:id="@+id/woloxPhone"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:id="@+id/terms_and_conditions"
+			android:layout_width="327dp"
+			android:layout_height="46dp"
+			android:layout_marginTop="720dp"
 			android:gravity="bottom|center_horizontal"
-			android:text="@string/example_wolox_phone"
+			android:text="@string/login_terms_and_conditions"
 			android:textSize="@dimen/font_medium_extra"
-			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.484"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/woloxLink" />
+			app:layout_constraintTop_toTopOf="@+id/imageView7" />
+
+		<Button
+			android:id="@+id/loginButton3"
+			android:layout_width="328dp"
+			android:layout_height="61dp"
+			android:layout_marginTop="32dp"
+			android:background="@color/colorPrimary"
+			android:text="@string/login_screen_signup_button"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.492"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 

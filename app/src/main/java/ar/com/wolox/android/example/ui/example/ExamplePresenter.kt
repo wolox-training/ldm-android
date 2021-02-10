@@ -13,9 +13,7 @@ class ExamplePresenter @Inject constructor(private val userSession: UserSession)
 
     fun onUsernameInputChanged(text: String) = view?.toggleLoginButtonEnable(text.isNotBlank())
 
-    fun onWoloxLinkClicked() = view?.openBrowser(WOLOX_URL)
-
-    fun onWoloxPhoneClicked() = view?.openPhone(WOLOX_PHONE)
+    fun onWoloxTermsAndConditionsClicked() = view?.openBrowser(WOLOX_URL)
 
     companion object {
         private const val WOLOX_URL = "www.wolox.com.ar"

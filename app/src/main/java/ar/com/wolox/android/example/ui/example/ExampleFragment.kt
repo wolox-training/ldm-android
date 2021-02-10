@@ -17,11 +17,10 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
 
     override fun setListeners() {
         with(binding) {
-            usernameInput.addTextChangedListener { presenter.onUsernameInputChanged(it.toString()) }
-            woloxLink.setOnClickListener { presenter.onWoloxLinkClicked() }
-            woloxPhone.setOnClickListener { presenter.onWoloxPhoneClicked() }
+            emailLogin.addTextChangedListener { presenter.onUsernameInputChanged(it.toString()) }
+            termsAndConditions.setOnClickListener { presenter.onWoloxTermsAndConditionsClicked() }
             loginButton.setOnClickListener {
-                presenter.onLoginButtonClicked(usernameInput.text.toString(), favouriteColorInput.text.toString())
+                presenter.onLoginButtonClicked(emailLogin.text.toString(), password.text.toString())
             }
         }
     }
