@@ -1,95 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:background="@color/fullWhite"
 		android:gravity="center"
-		android:orientation="vertical"
-		android:padding="@dimen/spacing_large">
+		android:orientation="vertical">
 
-		<TextView
-			android:id="@+id/title"
+		<ImageView
+			android:id="@+id/backgroundLogo"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/background_image_height"
+			android:adjustViewBounds="true"
+			android:background="@drawable/login_cover"
+			android:scaleType="centerCrop"
+			android:src="@drawable/gradient"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<ImageView
+			android:id="@+id/woloxLogo"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/example_title"
-			android:textSize="@dimen/font_medium_extra"
-			app:layout_constraintBottom_toTopOf="@id/usernameInput"
+			android:layout_marginTop="@dimen/wolox_logo_margin_top"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"
-			app:layout_constraintVertical_bias="0" />
+			app:layout_constraintTop_toTopOf="@+id/backgroundLogo"
+			app:srcCompat="@drawable/wolox_logo_large" />
 
 		<EditText
-			android:id="@+id/usernameInput"
+			android:id="@+id/email"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="@dimen/spacing_large_extra"
-			android:layout_marginRight="@dimen/spacing_large_extra"
+			android:layout_height="@dimen/login_input"
+			android:layout_marginStart="@dimen/login_input_margin_start"
+			android:layout_marginTop="@dimen/login_input_margin_top"
+			android:layout_marginEnd="@dimen/login_input_margin_end"
 			android:gravity="center"
-			android:hint="@string/fragment_example_username"
-			android:inputType="text"
+			android:hint="@string/login_screen_email_hint"
+			android:inputType="textEmailAddress"
 			android:maxLines="1"
-			app:layout_constraintBottom_toTopOf="@id/favouriteColorInput"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"
-			app:layout_constraintVertical_chainStyle="packed" />
+			app:layout_constraintTop_toBottomOf="@+id/woloxLogo" />
 
 		<EditText
-			android:id="@+id/favouriteColorInput"
+			android:id="@+id/password"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="@dimen/spacing_large_extra"
-			android:layout_marginTop="@dimen/spacing_large"
-			android:layout_marginRight="@dimen/spacing_large_extra"
+			android:layout_height="@dimen/login_input"
+			android:layout_marginStart="@dimen/login_input_margin_start"
+			android:layout_marginTop="@dimen/login_input_margin_top"
+			android:layout_marginEnd="@dimen/login_input_margin_end"
 			android:gravity="center"
-			android:hint="@string/fragment_example_favourite_color"
-			android:inputType="text"
+			android:hint="@string/login_screen_password_hint"
+			android:inputType="textPassword"
 			android:maxLines="1"
-			app:layout_constraintBottom_toTopOf="@id/loginButton"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/usernameInput" />
+			app:layout_constraintTop_toBottomOf="@+id/email" />
 
 		<Button
 			android:id="@+id/loginButton"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/spacing_large"
-			android:text="@string/fragment_example_login"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="@id/favouriteColorInput"
-			app:layout_constraintStart_toStartOf="@id/favouriteColorInput"
-			app:layout_constraintTop_toBottomOf="@id/favouriteColorInput" />
-
-		<TextView
-			android:id="@+id/woloxLink"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:gravity="bottom|center_horizontal"
-			android:text="@string/example_wolox"
-			android:textSize="@dimen/font_medium_extra"
-			app:layout_constraintBottom_toTopOf="@id/woloxPhone"
+			android:layout_width="@dimen/button_width"
+			android:layout_height="@dimen/button_height"
+			android:layout_marginTop="@dimen/button_margin_top"
+			android:text="@string/login_screen_login_button"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/loginButton"
-			app:layout_constraintVertical_bias="1"
-			app:layout_constraintVertical_chainStyle="packed" />
+			app:layout_constraintTop_toBottomOf="@+id/password" />
 
 		<TextView
-			android:id="@+id/woloxPhone"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			android:id="@+id/terms_and_conditions"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/static_spacing_big"
 			android:gravity="bottom|center_horizontal"
-			android:text="@string/example_wolox_phone"
+			android:text="@string/login_terms_and_conditions"
 			android:textSize="@dimen/font_medium_extra"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/woloxLink" />
+			app:layout_constraintTop_toBottomOf="@+id/signUpButton"
+			/>
+
+		<Button
+			android:id="@+id/signUpButton"
+			android:layout_width="@dimen/button_width"
+			android:layout_height="@dimen/button_height"
+			android:layout_marginTop="@dimen/button_margin_top"
+			android:background="@color/colorPrimary"
+			android:text="@string/login_screen_signup_button"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
