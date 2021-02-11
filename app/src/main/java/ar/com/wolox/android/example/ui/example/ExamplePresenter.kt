@@ -19,21 +19,10 @@ class ExamplePresenter @Inject constructor(private val userSession: UserSession)
     }
     fun onWoloxTermsAndConditionsClicked() = view?.openBrowser(WOLOX_URL)
 
-    fun onUsernameInputChanged(text: String): Nothing = TODO("implementar")
+    // fun onUsernameInputChanged(text: String): Nothing = TODO("implementar")
 
     companion object {
         private const val WOLOX_URL = "www.wolox.com.ar"
         private const val WOLOX_PHONE = "08001234567"
     }
 }
-
-// if( email.trim() == "" || password.trim() == "" ){
-//    // Alguno de los campos esta vacio
-// }
-// else if( email.trim() != "" && !android.util.Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches() ){
-//    // El email no cumple con un formato valido
-//    view?.toggleInvalidEmailAlert()
-// }else{
-//    userSession.username = email
-//    view?.goToViewPager(email)
-// }

@@ -21,7 +21,7 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
             loginButton.setOnClickListener {
                 presenter.onLoginButtonClicked(emailLogin.text.toString(), password.text.toString())
             }
-            emailLogin.addTextChangedListener { presenter.onUsernameInputChanged(it.toString()) }
+            // emailLogin.addTextChangedListener { presenter.onUsernameInputChanged(it.toString()) }
         }
     }
 
