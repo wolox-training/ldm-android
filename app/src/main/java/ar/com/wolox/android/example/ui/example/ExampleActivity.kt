@@ -1,8 +1,5 @@
 package ar.com.wolox.android.example.ui.example
 
-import android.content.Context
-import android.os.Bundle
-import android.os.PersistableBundle
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.ActivityBaseBinding
 import ar.com.wolox.wolmo.core.activity.WolmoActivity

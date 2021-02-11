@@ -14,31 +14,31 @@ class ExamplePresenterTest : WolmoPresenterTest<ExampleView, ExamplePresenter>()
 
     override fun getPresenterInstance() = ExamplePresenter(userSession)
 
-    @Test
-    fun `given an user and a color when login button is clicked then user session should be updated`() {
-
-        // GIVEN
-        val user = "Test"
-        val color = "_"
-
-        // WHEN
-        presenter.onLoginButtonClicked(user, color)
-
-        // THEN
-        verify(userSession, times(1)).username = user
-    }
-
-    @Test
-    fun `given an user and a color when login button is clicked then view should go to viewpager`() {
-
-        // GIVEN
-        val user = "Test"
-        val color = "blue"
-
-        // WHEN
-        presenter.onLoginButtonClicked(user, color)
-
-        // THEN
-        verify(view, times(1)).goToViewPager(color)
-    }
+//    @Test
+//    fun `given an user and a color when login button is clicked then user session should be updated`() {
+//
+//        // GIVEN
+//        val user = "Test"
+//        val color = "_"
+//
+//        // WHEN
+//        presenter.onLoginButtonClicked(user, color)
+//
+//        // THEN
+//        verify(userSession, times(1)).username = user
+//    }
+//
+//    @Test
+//    fun `given an user and a color when login button is clicked then view should go to viewpager`() {
+//
+//        // GIVEN
+//        val user = "Test"
+//        val color = "blue"
+//
+//        // WHEN
+//        presenter.onLoginButtonClicked(user, color)
+//
+//        // THEN
+//        verify(view, times(1)).goToViewPager(color)
+//    }
 }

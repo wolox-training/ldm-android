@@ -1,6 +1,5 @@
 package ar.com.wolox.android.example.ui.example
 
-import androidx.core.widget.addTextChangedListener
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentExampleBinding
 import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivity
