@@ -19,7 +19,7 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
         with(binding) {
             termsAndConditions.setOnClickListener { presenter.onWoloxTermsAndConditionsClicked() }
             loginButton.setOnClickListener {
-                presenter.onLoginButtonClicked(emailLogin.text.toString(), password.text.toString())
+                presenter.onLoginButtonClicked(email.text.toString(), password.text.toString())
             }
             // emailLogin.addTextChangedListener { presenter.onUsernameInputChanged(it.toString()) }
         }
