@@ -5,7 +5,7 @@ import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import javax.inject.Inject
 
 class ExamplePresenter @Inject constructor(private val userSession: UserSession) : BasePresenter<ExampleView>() {
-
+    // Check branch 2
     fun onLoginButtonClicked(user: String, color: String) {
         userSession.username = user
         view?.goToViewPager(color)
