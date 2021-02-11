@@ -28,7 +28,7 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
     override fun checkErrors(Errors: MutableMap<String, MutableList<String>>) {
         Errors.forEach { (s, mutableList) ->
             if (!mutableList.isEmpty()) {
-                if (s == "email") binding.emailLogin.error = mutableList.joinToString { "$it \n" }
+                if (s == "email") binding.email.error = mutableList.joinToString { "$it \n" }
                 if (s == "password") binding.password.error = mutableList.joinToString { "$it \n" }
             }
         }
