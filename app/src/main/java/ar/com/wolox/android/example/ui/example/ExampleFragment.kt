@@ -12,6 +12,7 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
     override fun layout() = R.layout.fragment_example
 
     override fun init() {
+        presenter.userWasLogged()
     }
 
     override fun setListeners() {
@@ -24,19 +25,13 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
         }
     }
 
-    override fun toggleEmptyEmailAlert() {
-        binding.emailLogin.requestFocus()
-        binding.emailLogin.setError(getString(R.string.login_alert_input))
-    }
-
-    override fun toggleEmptyPasswordAlert() {
-        binding.password.requestFocus()
-        binding.password.setError(getString(R.string.login_alert_input))
-    }
-
-    override fun toggleInvalidEmailAlert() {
-        binding.emailLogin.requestFocus()
-        binding.emailLogin.setError(getString(R.string.login_alert_bad_email))
+    override fun checkErrors(Errors: MutableMap<String, MutableList<String>>) {
+        Errors.forEach { (s, mutableList) ->
+            if (!mutableList.isEmpty()) {
+                if (s == "email") binding.emailLogin.error = mutableList.joinToString { "$it \n" }
+                if (s == "password") binding.password.error = mutableList.joinToString { "$it \n" }
+            }
+        }
     }
 
     override fun goToViewPager(favouriteColor: String) = ViewPagerActivity.start(requireContext(), favouriteColor)

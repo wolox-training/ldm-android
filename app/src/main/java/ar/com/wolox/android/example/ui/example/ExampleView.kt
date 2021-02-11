@@ -6,11 +6,7 @@ interface ExampleView {
 
     fun openBrowser(url: String)
 
-    fun toggleEmptyEmailAlert()
-
-    fun toggleEmptyPasswordAlert()
-
-    fun toggleInvalidEmailAlert()
+    fun checkErrors(Errors: MutableMap<String, MutableList<String>>)
 
     fun openPhone(woloxPhone: String): Any
 }

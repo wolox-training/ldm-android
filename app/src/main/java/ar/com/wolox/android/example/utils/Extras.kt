@@ -11,7 +11,8 @@ import androidx.fragment.app.Fragment
 object Extras {
 
     object UserLogin {
-        const val USERNAME = "username"
+        const val EMAIL = "username"
+        const val PASSWORD = "password"
     }
 
     object ViewPager {
