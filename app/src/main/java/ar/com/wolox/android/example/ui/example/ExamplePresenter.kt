@@ -15,7 +15,7 @@ class ExamplePresenter @Inject constructor(private val userSession: UserSession)
     fun onLoginButtonClicked(email: String, password: String) {
         var ErrorList: MutableMap<String, MutableList<String>> = mutableMapOf()
 
-        //TODO: How to avoid these lines ? I mean, how to create ErrorList[...] while inserting element in its list
+        // TODO: How to avoid these lines ? I mean, how to create ErrorList[...] while inserting element in its list
         ErrorList["email"] = mutableListOf()
         ErrorList["password"] = mutableListOf()
 
