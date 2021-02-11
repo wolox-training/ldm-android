@@ -6,7 +6,11 @@ interface ExampleView {
 
     fun openBrowser(url: String)
 
-    fun toggleLoginButtonEnable(isEnable: Boolean)
+    fun toggleEmptyEmailAlert()
+
+    fun toggleEmptyPasswordAlert()
+
+    fun toggleInvalidEmailAlert()
 
     fun openPhone(woloxPhone: String): Any
 }

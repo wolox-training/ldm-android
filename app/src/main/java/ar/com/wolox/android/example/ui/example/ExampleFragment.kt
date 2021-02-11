@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.example
 
+import androidx.core.widget.addTextChangedListener
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentExampleBinding
 import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivity
@@ -20,11 +21,23 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
             loginButton.setOnClickListener {
                 presenter.onLoginButtonClicked(emailLogin.text.toString(), password.text.toString())
             }
+            emailLogin.addTextChangedListener { presenter.onUsernameInputChanged(it.toString()) }
         }
     }
 
-    override fun toggleLoginButtonEnable(isEnable: Boolean) {
-        binding.loginButton.isEnabled = isEnable
+    override fun toggleEmptyEmailAlert() {
+        binding.emailLogin.requestFocus()
+        binding.emailLogin.setError(getString(R.string.login_alert_input))
+    }
+
+    override fun toggleEmptyPasswordAlert() {
+        binding.password.requestFocus()
+        binding.password.setError(getString(R.string.login_alert_input))
+    }
+
+    override fun toggleInvalidEmailAlert() {
+        binding.emailLogin.requestFocus()
+        binding.emailLogin.setError(getString(R.string.login_alert_bad_email))
     }
 
     override fun goToViewPager(favouriteColor: String) = ViewPagerActivity.start(requireContext(), favouriteColor)
