@@ -11,7 +11,7 @@ class ExamplePresenter @Inject constructor(private val userSession: UserSession)
         view?.goToViewPager(color)
     }
 
-    fun onUsernameInputChanged(text: String) = view?.toggleLoginButtonEnable(text.isNotBlank())
+    fun onEmptyFieldsDetected() = null
 
     fun onWoloxTermsAndConditionsClicked() = view?.openBrowser(WOLOX_URL)
 

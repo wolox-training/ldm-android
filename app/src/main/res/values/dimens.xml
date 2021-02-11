@@ -46,4 +46,22 @@
     <dimen name="font_huge">24sp</dimen>
 
     <!-- Add your custom dimens here -->
+
+    <!-- Images -->
+    <dimen name="background_image_height">200dp</dimen>
+    <dimen name="wolox_logo_margin_top">120dp</dimen>
+
+    <!-- Inputs -->
+    <dimen name="login_input">66dp</dimen>
+    <dimen name="login_input_margin_start">16dp</dimen>
+    <dimen name="login_input_margin_top">20dp</dimen>
+    <dimen name="login_input_margin_end">16dp</dimen>
+
+    <!-- Inputs -->
+    <dimen name="button_width">340dp</dimen>
+    <dimen name="button_height">60dp</dimen>
+    <dimen name="button_margin_top">20dp</dimen>
+
+    <!-- Terms and Conditions -->
+    <dimen name="terms_margin_top">92dp</dimen>
 </resources>

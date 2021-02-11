@@ -4,8 +4,8 @@
     <string name="example_title">ExampleFragment</string>
     <string name="example_random_description">Press the button to generate a random number</string>
     <string name="example_randomize">Randomize</string>
-    <string name="example_wolox">aaaaa</string>
-    <string name="login_terms_and_conditions">By joining you agree to our Terms &amp; Conditions</string>
+    <string name="example_wolox">Example Text</string>
+    <string name="login_terms_and_conditions">By joining you agree to our <u>Terms &amp; Conditions</u></string>
     <string name="example_message">The presenter generated the number %1$d and this view is displaying it</string>
     <string name="view_pager_title">Username: %1$s\nFavourite color: %2$s</string>
     <string name="random_toolbar_title">Random number example</string>
@@ -17,5 +17,7 @@
 	<string name="fragment_request_search">Search</string>
     <string name="fragment_request_post_id">Post id</string>
     <string name="fragment_request_invalid_input">Invalid input, please enter a valid id.</string>
+    <string name="login_alert_input">You must fill all the fields.</string>
+    <string name="login_alert_bad_email">You must fill all the fields.</string>
 
 </resources>

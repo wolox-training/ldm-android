@@ -1,6 +1,5 @@
 package ar.com.wolox.android.example.ui.example
 
-import androidx.core.widget.addTextChangedListener
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentExampleBinding
 import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivity
@@ -17,7 +16,6 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
 
     override fun setListeners() {
         with(binding) {
-            emailLogin.addTextChangedListener { presenter.onUsernameInputChanged(it.toString()) }
             termsAndConditions.setOnClickListener { presenter.onWoloxTermsAndConditionsClicked() }
             loginButton.setOnClickListener {
                 presenter.onLoginButtonClicked(emailLogin.text.toString(), password.text.toString())
