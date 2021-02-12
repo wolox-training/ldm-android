@@ -21,13 +21,12 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
             loginButton.setOnClickListener {
                 presenter.onLoginButtonClicked(email.text.toString(), password.text.toString())
             }
-            // emailLogin.addTextChangedListener { presenter.onUsernameInputChanged(it.toString()) }
         }
     }
 
     override fun checkErrors(Errors: MutableMap<String, MutableList<String>>) {
         Errors.forEach { (s, mutableList) ->
-            if (!mutableList.isEmpty()) {
+            if (mutableList.isNotEmpty()) {
                 if (s == "email") binding.email.error = mutableList.joinToString { "$it \n" }
                 if (s == "password") binding.password.error = mutableList.joinToString { "$it \n" }
             }

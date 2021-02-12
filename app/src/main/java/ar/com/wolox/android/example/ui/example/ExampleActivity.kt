@@ -11,10 +11,4 @@ class ExampleActivity : WolmoActivity<ActivityBaseBinding>() {
     override fun init() {
         replaceFragment(binding.activityBaseContent.id, ExampleFragment.newInstance())
     }
-
-//    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-//        super.onCreate(savedInstanceState, persistentState)
-//        setContentView(layout())
-//        var sharedPreferences = getSharedPreferences("CREDENTIALS", Context.MODE_PRIVATE)
-//    }
 }
