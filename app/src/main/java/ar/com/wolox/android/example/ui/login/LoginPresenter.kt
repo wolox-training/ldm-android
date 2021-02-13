@@ -1,51 +1,35 @@
 package ar.com.wolox.android.example.ui.login
 
+import android.util.Patterns
 import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import javax.inject.Inject
 
-fun flattenSize(m: MutableMap<String, MutableList<String>>): Int {
-    var acc = 0
-    m.forEach { (s, mutableList) -> acc += mutableList.size }
-    return acc
-}
+class LoginPresenter @Inject constructor(private val userSession: UserSession) : BasePresenter<LoginView>() {
 
-class ExamplePresenter @Inject constructor(private val userSession: UserSession) : BasePresenter<LoginView>() {
-
-    fun onLoginButtonClicked(email: String, password: String) {
-        var ErrorList: MutableMap<String, MutableList<String>> = mutableMapOf()
-
-        // TODO: How to avoid these lines ? I mean, how to create ErrorList[...] while inserting element in its list
-        ErrorList["email"] = mutableListOf()
-        ErrorList["password"] = mutableListOf()
-
-        // TODO: How can I make this lines "more" general ?
-        if (email.trim() == EMPTY_STRING) ErrorList["email"]?.add(ERROR_INPUT)
-        if (password.trim() == EMPTY_STRING) ErrorList["password"]?.add(ERROR_INPUT)
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()) ErrorList["email"]?.add(ERROR_BAD_EMAIL)
-
-        if (flattenSize(ErrorList) == 0) {
-            println("ENTRE")
-            userSession.email = email
-            userSession.password = password
-            view?.goToViewPager(email)
-        } else {
-            view?.checkErrors(ErrorList)
-        }
-    }
-    fun onWoloxTermsAndConditionsClicked() = view?.openBrowser(WOLOX_URL)
-
-    fun userWasLogged() {
-        if (userSession.email != "" && userSession.password != "") {
+    override fun onViewAttached() {
+        if (userSession.userIsLogged) {
             view?.goToViewPager(userSession.email.toString())
         }
     }
 
+    fun onLoginButtonClicked(email: String, password: String) {
+        val errorEnum = mutableListOf<ErrorEnum>()
+        if (email.isEmpty()) errorEnum.add(ErrorEnum.EMPTY_EMAIL)
+        if (password.isEmpty()) errorEnum.add(ErrorEnum.EMPTY_PASSWORD)
+        if (email.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) errorEnum.add(ErrorEnum.INVALID_EMAIL)
+
+        if (errorEnum.isEmpty()) {
+            userSession.email = email
+            userSession.password = password
+            view?.goToViewPager(email)
+        } else {
+            view?.checkErrors(errorEnum)
+        }
+    }
+    fun onWoloxTermsAndConditionsClicked() = view?.openBrowser(WOLOX_URL)
+
     companion object {
         private const val WOLOX_URL = "www.wolox.com.ar"
-        private const val WOLOX_PHONE = "08001234567"
-        private const val EMPTY_STRING = ""
-        private const val ERROR_INPUT = "You must fill all the fields."
-        private const val ERROR_BAD_EMAIL = "Invalid email format."
     }
 }

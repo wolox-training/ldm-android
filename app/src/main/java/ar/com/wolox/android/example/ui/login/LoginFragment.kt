@@ -1,34 +1,34 @@
 package ar.com.wolox.android.example.ui.login
 
 import ar.com.wolox.android.R
-import ar.com.wolox.android.databinding.FragmentExampleBinding
+import ar.com.wolox.android.databinding.FragmentLoginBinding
 import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivity
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.util.openBrowser
 import ar.com.wolox.wolmo.core.util.openDial
 
-class LoginFragment private constructor() : WolmoFragment<FragmentExampleBinding, ExamplePresenter>(), LoginView {
+class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, LoginPresenter>(), LoginView {
 
-    override fun layout() = R.layout.fragment_example
+    override fun layout() = R.layout.fragment_login
 
     override fun init() {
-        presenter.userWasLogged()
     }
 
     override fun setListeners() {
         with(binding) {
             termsAndConditions.setOnClickListener { presenter.onWoloxTermsAndConditionsClicked() }
             loginButton.setOnClickListener {
-                presenter.onLoginButtonClicked(email.text.toString(), password.text.toString())
+                presenter.onLoginButtonClicked(email.text.toString().trim(), password.text.toString().trim())
             }
         }
     }
 
-    override fun checkErrors(Errors: MutableMap<String, MutableList<String>>) {
-        Errors.forEach { (s, mutableList) ->
-            if (mutableList.isNotEmpty()) {
-                if (s == "email") binding.email.error = mutableList.joinToString { "$it \n" }
-                if (s == "password") binding.password.error = mutableList.joinToString { "$it \n" }
+    override fun checkErrors(Errors: MutableList<ErrorEnum>) {
+        Errors.forEach {
+            when (it) {
+                ErrorEnum.EMPTY_PASSWORD -> binding.password.error = getString(R.string.login_alert_input)
+                ErrorEnum.INVALID_EMAIL -> binding.email.error = getString(R.string.login_alert_bad_email)
+                ErrorEnum.EMPTY_EMAIL -> binding.email.error = getString(R.string.login_alert_input)
             }
         }
     }

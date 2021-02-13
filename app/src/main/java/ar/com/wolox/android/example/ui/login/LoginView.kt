@@ -6,7 +6,7 @@ interface LoginView {
 
     fun openBrowser(url: String)
 
-    fun checkErrors(Errors: MutableMap<String, MutableList<String>>)
+    fun checkErrors(Errors: MutableList<ErrorEnum>)
 
     fun openPhone(woloxPhone: String): Any
 }

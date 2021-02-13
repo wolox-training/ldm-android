@@ -28,4 +28,7 @@ class UserSession @Inject constructor(private val sharedPreferencesManager: Shar
             field = password
             sharedPreferencesManager[Extras.UserLogin.PASSWORD, password]
         }
+
+    val userIsLogged: Boolean
+        get() = email != "" && password != ""
 }
