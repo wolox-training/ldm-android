@@ -1,6 +1,6 @@
-package ar.com.wolox.android.example.ui.example
+package ar.com.wolox.android.example.ui.login
 
-interface ExampleView {
+interface LoginView {
 
     fun goToViewPager(favouriteColor: String)
 

@@ -1,4 +1,4 @@
-package ar.com.wolox.android.example.ui.example
+package ar.com.wolox.android.example.ui.login
 
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentExampleBinding
@@ -7,7 +7,7 @@ import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.util.openBrowser
 import ar.com.wolox.wolmo.core.util.openDial
 
-class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBinding, ExamplePresenter>(), ExampleView {
+class LoginFragment private constructor() : WolmoFragment<FragmentExampleBinding, ExamplePresenter>(), LoginView {
 
     override fun layout() = R.layout.fragment_example
 
@@ -40,6 +40,6 @@ class ExampleFragment private constructor() : WolmoFragment<FragmentExampleBindi
     override fun openPhone(woloxPhone: String) = requireContext().openDial(woloxPhone)
 
     companion object {
-        fun newInstance() = ExampleFragment()
+        fun newInstance() = LoginFragment()
     }
 }

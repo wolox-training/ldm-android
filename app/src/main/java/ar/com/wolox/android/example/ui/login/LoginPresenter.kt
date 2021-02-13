@@ -1,4 +1,4 @@
-package ar.com.wolox.android.example.ui.example
+package ar.com.wolox.android.example.ui.login
 
 import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
@@ -10,7 +10,7 @@ fun flattenSize(m: MutableMap<String, MutableList<String>>): Int {
     return acc
 }
 
-class ExamplePresenter @Inject constructor(private val userSession: UserSession) : BasePresenter<ExampleView>() {
+class ExamplePresenter @Inject constructor(private val userSession: UserSession) : BasePresenter<LoginView>() {
 
     fun onLoginButtonClicked(email: String, password: String) {
         var ErrorList: MutableMap<String, MutableList<String>> = mutableMapOf()

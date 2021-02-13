@@ -1,8 +1,7 @@
-package ar.com.wolox.android.example.ui.example
+package ar.com.wolox.android.example.ui.login
 
 import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.wolmo.core.tests.WolmoPresenterTest
-import com.nhaarman.mockitokotlin2.times
 import org.mockito.Mock
 
 class ExamplePresenterTest : WolmoPresenterTest<ExampleView, ExamplePresenter>() {
