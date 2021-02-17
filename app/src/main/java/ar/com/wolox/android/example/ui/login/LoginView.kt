@@ -13,4 +13,6 @@ interface LoginView {
     fun showEmptyEmailError()
 
     fun showEmailInvalidError()
+
+    fun goToSignUpPage()
 }

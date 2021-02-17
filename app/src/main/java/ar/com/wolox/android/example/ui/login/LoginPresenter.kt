@@ -33,6 +33,9 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession) :
             view?.goToViewPager(email)
         }
     }
+
+    fun onSignUpButtonClicked() = view?.goToSignUpPage()
+
     fun onWoloxTermsAndConditionsClicked() = view?.openBrowser(WOLOX_URL)
 
     companion object {
