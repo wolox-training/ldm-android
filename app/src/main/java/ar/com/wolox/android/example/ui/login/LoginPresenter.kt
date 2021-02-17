@@ -14,17 +14,23 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession) :
     }
 
     fun onLoginButtonClicked(email: String, password: String) {
-        val errorEnum = mutableListOf<ErrorEnum>()
-        if (email.isEmpty()) errorEnum.add(ErrorEnum.EMPTY_EMAIL)
-        if (password.isEmpty()) errorEnum.add(ErrorEnum.EMPTY_PASSWORD)
-        if (email.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) errorEnum.add(ErrorEnum.INVALID_EMAIL)
-
-        if (errorEnum.isEmpty()) {
+        var errorHappened = false
+        if (email.isEmpty()) {
+            view?.showEmptyEmailError()
+            errorHappened = true
+        }
+        if (password.isEmpty()) {
+            view?.showEmptyPasswordError()
+            errorHappened = true
+        }
+        if (email.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            view?.showEmailInvalidError()
+            errorHappened = true
+        }
+        if (!errorHappened) {
             userSession.email = email
             userSession.password = password
             view?.goToViewPager(email)
-        } else {
-            view?.checkErrors(errorEnum)
         }
     }
     fun onWoloxTermsAndConditionsClicked() = view?.openBrowser(WOLOX_URL)
