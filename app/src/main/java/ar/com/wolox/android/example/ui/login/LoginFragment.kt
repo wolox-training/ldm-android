@@ -23,21 +23,23 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
         }
     }
 
-    override fun checkErrors(Errors: MutableList<ErrorEnum>) {
-        Errors.forEach {
-            when (it) {
-                ErrorEnum.EMPTY_PASSWORD -> binding.password.error = getString(R.string.login_alert_input)
-                ErrorEnum.INVALID_EMAIL -> binding.email.error = getString(R.string.login_alert_bad_email)
-                ErrorEnum.EMPTY_EMAIL -> binding.email.error = getString(R.string.login_alert_input)
-            }
-        }
-    }
-
     override fun goToViewPager(favouriteColor: String) = ViewPagerActivity.start(requireContext(), favouriteColor)
 
     override fun openBrowser(url: String) = requireContext().openBrowser(url)
 
     override fun openPhone(woloxPhone: String) = requireContext().openDial(woloxPhone)
+
+    override fun showEmptyPasswordError() {
+        binding.password.error = getString(R.string.login_alert_input)
+    }
+
+    override fun showEmptyEmailError() {
+        binding.email.error = getString(R.string.login_alert_input)
+    }
+
+    override fun showEmailInvalidError() {
+        binding.email.error = getString(R.string.login_alert_bad_email)
+    }
 
     companion object {
         fun newInstance() = LoginFragment()

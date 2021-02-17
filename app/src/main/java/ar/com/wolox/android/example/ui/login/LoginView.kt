@@ -6,7 +6,11 @@ interface LoginView {
 
     fun openBrowser(url: String)
 
-    fun checkErrors(Errors: MutableList<ErrorEnum>)
-
     fun openPhone(woloxPhone: String): Any
+
+    fun showEmptyPasswordError()
+
+    fun showEmptyEmailError()
+
+    fun showEmailInvalidError()
 }
