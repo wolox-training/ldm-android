@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/headerSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_tiniest"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:background="@color/cardview_dark_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signUpText" />
+
+        <TextView
+            android:id="@+id/signUpText"
+            android:layout_width="@dimen/signup_title"
+            android:layout_height="@dimen/spacing_huge_extra"
+            android:layout_marginStart="@dimen/spacing_big"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:text="@string/home_screen_header_text"
+            android:textSize="@dimen/font_title"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/wolox_logo_signup_width"
+            android:layout_height="@dimen/wolox_logo_signup_height"
+            android:layout_marginStart="@dimen/spacing_large"
+            app:layout_constraintBottom_toTopOf="@+id/headerSeparator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/wolox_logo"
+            android:contentDescription="TODO" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/headerSeparator" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
