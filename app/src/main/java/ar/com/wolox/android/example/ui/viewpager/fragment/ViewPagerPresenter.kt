@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class ViewPagerPresenter @Inject constructor(private val userSession: UserSession) : BasePresenter<ViewPagerView>() {
 
-    fun onInit(favouriteColor: String) = userSession.username?.let {
+    fun onInit(favouriteColor: String) = userSession.email?.let {
         view?.showUserAndFavouriteColor(it, favouriteColor)
     }
 
