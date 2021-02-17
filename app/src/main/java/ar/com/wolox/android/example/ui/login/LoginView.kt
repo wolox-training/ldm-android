@@ -2,7 +2,7 @@ package ar.com.wolox.android.example.ui.login
 
 interface LoginView {
 
-    fun goToViewPager(favouriteColor: String)
+    fun goToHomePage()
 
     fun openBrowser(url: String)
 
@@ -13,4 +13,6 @@ interface LoginView {
     fun showEmptyEmailError()
 
     fun showEmailInvalidError()
+
+    fun goToSignUpPage()
 }

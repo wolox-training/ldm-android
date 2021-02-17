@@ -9,7 +9,7 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession) :
 
     override fun onViewAttached() {
         if (userSession.userIsLogged) {
-            view?.goToViewPager(userSession.email.toString())
+            view?.goToHomePage()
         }
     }
 
@@ -30,9 +30,12 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession) :
         if (!errorHappened) {
             userSession.email = email
             userSession.password = password
-            view?.goToViewPager(email)
+            view?.goToHomePage()
         }
     }
+
+    fun onSignUpButtonClicked() = view?.goToSignUpPage()
+
     fun onWoloxTermsAndConditionsClicked() = view?.openBrowser(WOLOX_URL)
 
     companion object {

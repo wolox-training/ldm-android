@@ -14,9 +14,17 @@
     <string name="login_screen_password_hint">Password</string>
     <string name="login_screen_login_button">Login</string>
     <string name="login_screen_signup_button">Sign Up</string>
-	<string name="fragment_request_search">Search</string>
+    <string name="fragment_request_search">Search</string>
     <string name="fragment_request_post_id">Post id</string>
     <string name="fragment_request_invalid_input">Invalid input, please enter a valid id.</string>
+    <string name="signup_screen_button_join">Join.</string>
+    <string name="signup_screen_email_hint">Email.</string>
+    <string name="signup_screen_password_hint">Password.</string>
+    <string name="signup_screen_confirm_password_hint">Confirm password.</string>
+    <string name="signup_screen_header_text">Sign Up.</string>
+    <string name="home_screen_header_text">Wolox.</string>
+
+
 
     <!-- Error Messages -->
     <string name="login_alert_input">You must fill all the fields.</string>
