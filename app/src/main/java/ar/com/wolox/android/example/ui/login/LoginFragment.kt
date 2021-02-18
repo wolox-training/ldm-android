@@ -2,7 +2,8 @@ package ar.com.wolox.android.example.ui.login
 
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
-import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivity
+import ar.com.wolox.android.example.ui.home.HomeActivity
+import ar.com.wolox.android.example.ui.signup.SignupActivity
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.util.openBrowser
 import ar.com.wolox.wolmo.core.util.openDial
@@ -20,10 +21,13 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
             loginButton.setOnClickListener {
                 presenter.onLoginButtonClicked(email.text.toString().trim(), password.text.toString().trim())
             }
+            signUpButton.setOnClickListener { presenter.onSignUpButtonClicked() }
         }
     }
 
-    override fun goToViewPager(favouriteColor: String) = ViewPagerActivity.start(requireContext(), favouriteColor)
+    override fun goToSignUpPage() = SignupActivity.start(requireContext())
+
+    override fun goToHomePage() = HomeActivity.start(requireContext())
 
     override fun openBrowser(url: String) = requireContext().openBrowser(url)
 

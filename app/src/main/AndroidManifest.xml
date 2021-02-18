@@ -25,6 +25,11 @@
 
         </activity>
 
+        <activity android:name=".example.ui.signup.SignupActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".example.ui.home.HomeActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".example.ui.viewpager.ViewPagerActivity"
             android:screenOrientation="portrait" />
