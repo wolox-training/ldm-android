@@ -45,6 +45,10 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
         binding.email.error = getString(R.string.login_alert_bad_email)
     }
 
+    override fun showLoginError() {
+        println("Log In Error - Invalid Credentials")
+    }
+
     companion object {
         fun newInstance() = LoginFragment()
     }
