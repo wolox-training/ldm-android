@@ -31,10 +31,12 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
             errorHappened = true
         }
         if (!errorHappened) {
-            userSession.email = email
-            userSession.password = password
             networkRequest(userRepository.authUser(email, password)) {
-                onResponseSuccessful { view?.goToHomePage() }
+                onResponseSuccessful {
+                    userSession.email = email
+                    userSession.password = password
+                    view?.goToHomePage()
+                }
                 onResponseFailed { _, _ -> view?.showLoginError() }
             }
         }

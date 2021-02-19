@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.utils
 
+import ar.com.wolox.android.example.network.NetworkHeaders
 import ar.com.wolox.wolmo.core.di.scopes.ApplicationScope
 import ar.com.wolox.wolmo.core.util.SharedPreferencesManager
 
@@ -27,6 +28,33 @@ class UserSession @Inject constructor(private val sharedPreferencesManager: Shar
         set(password) {
             field = password
             sharedPreferencesManager[Extras.UserLogin.PASSWORD, password]
+        }
+
+    var accessToken: String? = null
+        get() = field ?: sharedPreferencesManager[NetworkHeaders.ACCESS_TOKEN, null].also {
+            field = it
+        }
+        set(token) {
+            field = token
+            sharedPreferencesManager[NetworkHeaders.ACCESS_TOKEN, token]
+        }
+
+    var uid: String? = null
+        get() = field ?: sharedPreferencesManager[NetworkHeaders.UID, null].also {
+            field = it
+        }
+        set(uid) {
+            field = uid
+            sharedPreferencesManager[NetworkHeaders.UID, uid]
+        }
+
+    var client: String? = null
+        get() = field ?: sharedPreferencesManager[NetworkHeaders.CLIENT, null].also {
+            field = it
+        }
+        set(client) {
+            field = client
+            sharedPreferencesManager[NetworkHeaders.CLIENT, uid]
         }
 
     val userIsLogged: Boolean
