@@ -14,7 +14,11 @@ interface LoginView {
 
     fun showEmailInvalidError()
 
-    fun showLoginError()
-
     fun goToSignUpPage()
+
+    fun toggleSpinnerVisibility(toggle: Boolean)
+
+    fun showIncorrectCredentialsToast()
+
+    fun showNoConnectionToast()
 }

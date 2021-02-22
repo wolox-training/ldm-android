@@ -8,7 +8,10 @@ import ar.com.wolox.wolmo.core.presenter.CoroutineBasePresenter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LoginPresenter @Inject constructor(private val userSession: UserSession, private val userRepository: UserRepository) : CoroutineBasePresenter<LoginView>() {
+class LoginPresenter @Inject constructor(
+    private val userSession: UserSession,
+    private val userRepository: UserRepository
+) : CoroutineBasePresenter<LoginView>() {
 
     override fun onViewAttached() {
         if (userSession.userIsLogged) {
@@ -31,14 +34,16 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
             errorHappened = true
         }
         if (!errorHappened) {
+            view?.toggleSpinnerVisibility(SHOW_SPINNER)
             networkRequest(userRepository.authUser(email, password)) {
                 onResponseSuccessful {
                     userSession.email = email
                     userSession.password = password
                     view?.goToHomePage()
                 }
-                onResponseFailed { _, _ -> view?.showLoginError() }
+                onResponseFailed { _, _ -> view?.showIncorrectCredentialsToast() }
             }
+            view?.toggleSpinnerVisibility(HIDE_SPINNER)
         }
     }
 
@@ -48,5 +53,7 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
 
     companion object {
         private const val WOLOX_URL = "www.wolox.com.ar"
+        private const val SHOW_SPINNER = true
+        private const val HIDE_SPINNER = false
     }
 }
