@@ -1,6 +1,5 @@
 package ar.com.wolox.android.example.ui.login
 
-import android.view.View
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
 import ar.com.wolox.android.example.ui.home.HomeActivity
@@ -35,7 +34,6 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
     override fun goToSignUpPage() = SignupActivity.start(requireContext())
 
     override fun toggleSpinnerVisibility(toggle: Boolean) = binding.progressBar.toggleVisibilityAnimation(toggle)
-
 
     override fun showIncorrectCredentialsToast() {
         toastFactory.show("Error de credenciales")
