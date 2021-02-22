@@ -2,6 +2,8 @@ package ar.com.wolox.android.example
 
 import ar.com.wolox.android.BuildConfig
 import ar.com.wolox.android.example.di.DaggerAppComponent
+import ar.com.wolox.android.example.network.NetworkHeaders
+import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.wolmo.core.WolmoApplication
 import ar.com.wolox.wolmo.networking.di.DaggerNetworkingComponent
 import ar.com.wolox.wolmo.networking.di.NetworkingComponent
@@ -9,10 +11,15 @@ import com.google.gson.FieldNamingPolicy
 import com.readystatesoftware.chuck.ChuckInterceptor
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
+import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
+import javax.inject.Inject
 
 class BootstrapApplication : WolmoApplication() {
+
+    @Inject
+    lateinit var userSession: UserSession
 
     override fun onInit() {
         // Initialize Application stuff here
@@ -50,6 +57,17 @@ class BootstrapApplication : WolmoApplication() {
      * @return New instance of interceptor
      */
     private fun buildHttpLoggingInterceptor(newLevel: HttpLoggingInterceptor.Level): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply { this.level = newLevel }
+        return HttpLoggingInterceptor().apply {
+            this.level = newLevel
+        }
+    }
+
+    private fun headersInterceptor() = Interceptor { chain ->
+        val request = chain.request()
+        val response = chain.proceed(request)
+        userSession.accessToken = response.headers[NetworkHeaders.ACCESS_TOKEN]
+        userSession.client = response.headers[NetworkHeaders.CLIENT]
+        userSession.uid = response.headers[NetworkHeaders.UID]
+        response
     }
 }
