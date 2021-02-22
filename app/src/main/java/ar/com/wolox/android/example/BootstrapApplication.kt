@@ -44,7 +44,7 @@ class BootstrapApplication : WolmoApplication() {
 
         if (BuildConfig.DEBUG) {
             builder.okHttpInterceptors(
-                    buildHttpLoggingInterceptor(Level.BODY), ChuckInterceptor(this))
+                    buildHttpLoggingInterceptor(Level.BODY), ChuckInterceptor(this), headersInterceptor())
         }
 
         return builder.build()
@@ -63,11 +63,27 @@ class BootstrapApplication : WolmoApplication() {
     }
 
     private fun headersInterceptor() = Interceptor { chain ->
-        val request = chain.request()
+        val request = chain.request().let {
+            if (userSession.userIsLogged) {
+                it.newBuilder()
+                        .addHeader(NetworkHeaders.ACCESS_TOKEN, userSession.accessToken!!)
+                        .addHeader(NetworkHeaders.CLIENT, userSession.client!!)
+                        .addHeader(NetworkHeaders.UID, userSession.uid!!)
+                        .build()
+            } else {
+                it
+            }
+        }
         val response = chain.proceed(request)
-        userSession.accessToken = response.headers[NetworkHeaders.ACCESS_TOKEN]
-        userSession.client = response.headers[NetworkHeaders.CLIENT]
-        userSession.uid = response.headers[NetworkHeaders.UID]
+        if (!response.headers[NetworkHeaders.ACCESS_TOKEN].isNullOrEmpty()) {
+            userSession.accessToken = response.headers[NetworkHeaders.ACCESS_TOKEN]
+        }
+        if (!response.headers[NetworkHeaders.CLIENT].isNullOrEmpty()) {
+            userSession.client = response.headers[NetworkHeaders.CLIENT]
+        }
+        if (!response.headers[NetworkHeaders.UID].isNullOrEmpty()) {
+            userSession.uid = response.headers[NetworkHeaders.UID]
+        }
         response
     }
 }
