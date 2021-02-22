@@ -29,5 +29,7 @@
     <!-- Error Messages -->
     <string name="login_alert_input">You must fill all the fields.</string>
     <string name="login_alert_bad_email">Invalid email format.</string>
+    <string name="login_invalid_credentials">Invalid credentials. Check your username or password.</string>
+    <string name="login_connection_error">No internet connection found.</string>
 
 </resources>

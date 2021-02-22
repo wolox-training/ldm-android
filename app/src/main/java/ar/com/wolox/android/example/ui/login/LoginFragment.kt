@@ -35,13 +35,9 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
 
     override fun toggleSpinnerVisibility(toggle: Boolean) = binding.progressBar.toggleVisibilityAnimation(toggle)
 
-    override fun showIncorrectCredentialsToast() {
-        toastFactory.show("Error de credenciales")
-    }
+    override fun showIncorrectCredentialsToast() = toastFactory.show(R.string.login_invalid_credentials)
 
-    override fun showNoConnectionToast() {
-        TODO("Not yet implemented")
-    }
+    override fun showNoConnectionToast() = toastFactory.show(R.string.login_connection_error)
 
     override fun goToHomePage() = HomeActivity.start(requireContext())
 

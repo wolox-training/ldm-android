@@ -42,6 +42,7 @@ class LoginPresenter @Inject constructor(
                     view?.goToHomePage()
                 }
                 onResponseFailed { _, _ -> view?.showIncorrectCredentialsToast() }
+                onCallFailure { view?.showNoConnectionToast() }
             }
             view?.toggleSpinnerVisibility(HIDE_SPINNER)
         }
