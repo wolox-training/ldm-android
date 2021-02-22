@@ -47,7 +47,7 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
     }
 
     override fun showLoginError() {
-        Log.e("Log In Error ","Invalid Credentials")
+        Log.e("Log In Error ", "Invalid Credentials")
         // Toast message will be implemented in the next card (next Pull Request)
     }
 
