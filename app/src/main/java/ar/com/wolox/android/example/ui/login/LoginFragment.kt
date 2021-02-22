@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.login
 
+import android.util.Log
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
 import ar.com.wolox.android.example.ui.home.HomeActivity
@@ -46,7 +47,8 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
     }
 
     override fun showLoginError() {
-        println("Log In Error - Invalid Credentials")
+        Log.e("Log In Error ","Invalid Credentials")
+        // Toast message will be implemented in the next card (next Pull Request)
     }
 
     companion object {

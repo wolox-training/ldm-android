@@ -2,6 +2,7 @@ package ar.com.wolox.android.example.ui.home
 
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentHomeBinding
+import ar.com.wolox.android.example.ui.login.LoginActivity
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 
 class HomeFragment : WolmoFragment<FragmentHomeBinding, HomePresenter>(), HomeView {
@@ -13,4 +14,6 @@ class HomeFragment : WolmoFragment<FragmentHomeBinding, HomePresenter>(), HomeVi
     companion object {
         fun newInstance() = HomeFragment()
     }
+
+    override fun goToLoginPage() = LoginActivity.start(requireContext())
 }
