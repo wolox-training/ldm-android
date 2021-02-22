@@ -1,11 +1,14 @@
 package ar.com.wolox.android.example.ui.login
 
 import android.util.Patterns
+import ar.com.wolox.android.example.network.builder.networkRequest
+import ar.com.wolox.android.example.network.repository.UserRepository
 import ar.com.wolox.android.example.utils.UserSession
-import ar.com.wolox.wolmo.core.presenter.BasePresenter
+import ar.com.wolox.wolmo.core.presenter.CoroutineBasePresenter
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LoginPresenter @Inject constructor(private val userSession: UserSession) : BasePresenter<LoginView>() {
+class LoginPresenter @Inject constructor(private val userSession: UserSession, private val userRepository: UserRepository) : CoroutineBasePresenter<LoginView>() {
 
     override fun onViewAttached() {
         if (userSession.userIsLogged) {
@@ -13,7 +16,7 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession) :
         }
     }
 
-    fun onLoginButtonClicked(email: String, password: String) {
+    fun onLoginButtonClicked(email: String, password: String) = launch {
         var errorHappened = false
         if (email.isEmpty()) {
             view?.showEmptyEmailError()
@@ -30,7 +33,10 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession) :
         if (!errorHappened) {
             userSession.email = email
             userSession.password = password
-            view?.goToHomePage()
+            networkRequest(userRepository.authUser(email, password)) {
+                onResponseSuccessful { view?.goToHomePage() }
+                onResponseFailed { _, _ -> view?.showLoginError() }
+            }
         }
     }
 

@@ -14,5 +14,7 @@ interface LoginView {
 
     fun showEmailInvalidError()
 
+    fun showLoginError()
+
     fun goToSignUpPage()
 }
