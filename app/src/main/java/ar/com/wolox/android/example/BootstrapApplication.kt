@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example
 
+import android.util.Log
 import ar.com.wolox.android.BuildConfig
 import ar.com.wolox.android.example.di.DaggerAppComponent
 import ar.com.wolox.android.example.network.NetworkHeaders
@@ -70,6 +71,10 @@ class BootstrapApplication : WolmoApplication() {
                         .addHeader(NetworkHeaders.CLIENT, userSession.client!!)
                         .addHeader(NetworkHeaders.UID, userSession.uid!!)
                         .build()
+                Log.wtf("Miro access token", userSession.accessToken)
+                Log.wtf("Miro access client", userSession.client)
+                Log.wtf("Miro access uid", userSession.uid)
+                it
             } else {
                 it
             }
@@ -77,12 +82,15 @@ class BootstrapApplication : WolmoApplication() {
         val response = chain.proceed(request)
         if (!response.headers[NetworkHeaders.ACCESS_TOKEN].isNullOrEmpty()) {
             userSession.accessToken = response.headers[NetworkHeaders.ACCESS_TOKEN]
+            Log.wtf("guardo access token", userSession.accessToken)
         }
         if (!response.headers[NetworkHeaders.CLIENT].isNullOrEmpty()) {
             userSession.client = response.headers[NetworkHeaders.CLIENT]
+            Log.wtf("guardo access client", userSession.client)
         }
         if (!response.headers[NetworkHeaders.UID].isNullOrEmpty()) {
             userSession.uid = response.headers[NetworkHeaders.UID]
+            Log.wtf("guardo access uid", userSession.uid)
         }
         response
     }
