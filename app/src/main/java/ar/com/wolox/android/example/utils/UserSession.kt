@@ -24,7 +24,6 @@ class UserSession @Inject constructor(private val sharedPreferencesManager: Shar
             sharedPreferencesManager.store(Extras.UserLogin.PASSWORD, password)
         }
 
-
     var accessToken: String?
         get() = sharedPreferencesManager[NetworkHeaders.ACCESS_TOKEN, null]
         set(accessToken) {
