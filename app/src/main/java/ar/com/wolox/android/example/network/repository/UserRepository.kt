@@ -13,8 +13,6 @@ class UserRepository @Inject constructor(private val retrofitServices: RetrofitS
     private val service: UserService
         get() = retrofitServices.getService(UserService::class.java)
 
-    suspend fun authUser(email: String, password: String) = withContext(Dispatchers.IO) {
-        val response = NetworkRequestHandler.safeApiCall { service.authUser(UserAuth(email, password)) }
-        response
-    }
+    suspend fun authUser(email: String, password: String) =
+            withContext(Dispatchers.IO) { NetworkRequestHandler.safeApiCall { service.authUser(UserAuth(email, password)) } }
 }
