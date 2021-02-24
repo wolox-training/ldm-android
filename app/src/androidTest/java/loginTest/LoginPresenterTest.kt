@@ -9,6 +9,8 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
 
 class LoginPresenterTest : WolmoPresenterTest<LoginView, LoginPresenter>() {
     @get:Rule
@@ -21,38 +23,67 @@ class LoginPresenterTest : WolmoPresenterTest<LoginView, LoginPresenter>() {
 
     @Test
     fun missingCredentials() {
-        // TODO(To implement)
+        // Given the three possible cases of missing credentials (NO EMAIL-NO PASSWORD, NO EMAIL, NO PASSWORD)
+        val email = "hello@mail.com"
+        val password = "password"
+        presenter.onLoginButtonClicked(email, "")
+        presenter.onLoginButtonClicked("", password)
+        presenter.onLoginButtonClicked("", "")
+        verify(view.showEmptyPasswordError(), times(2))
+        verify(view.showEmptyEmailError(), times(2))
     }
 
     @Test
     fun invalidEmail() {
         // Idea : Declare multiple emails and test them here
-        // TODO(To implement)
+        val email = "aaaaa"
+        val password = "123456"
+
+        presenter.onLoginButtonClicked(email, password)
+        verify(view.showEmailInvalidError(), times(1))
     }
 
     @Test
     fun nonExistingEmail() = runBlocking {
         // Given a non existing email, response should result on 'invalid credentials' message.
+
+        // GIVEN
         val nonExistingEmail = "nonexistingemail@mail.com"
         val password = "password"
-        // presenter.onLoginButtonClicked(nonExistingEmail, password)
-        // TODO In the next card error toast will be implemented, and tested here.
-        // verify(view, times(1))
+
+        // WHEN
+        presenter.onLoginButtonClicked(nonExistingEmail, password)
+
+        // EXPECT
+        verify(view.showIncorrectCredentialsToast(), times(1))
     }
 
     @Test
     fun incorrectPassword() = runBlocking {
-        // TODO In the next card error toast will be implemented, and tested here.
-    }
+        // Given an existing email, but a wrong password, response should result on 'invalid credentials' message.
 
-    @Test
-    fun noInternetConnection() = runBlocking {
-        // Todo In the next card error toast will be implemented, and tested here.
+        // GIVEN
+        val nonExistingEmail = "clinton.harris59@mail.com"
+        val password = "password"
+
+        // WHEN
+        presenter.onLoginButtonClicked(nonExistingEmail, password)
+
+        // EXPECT
+        verify(view.showIncorrectCredentialsToast(), times(1))
     }
 
     @Test
     fun existingEmail() = runBlocking {
+        // Given a correct email and password, response should result on going to HomeActivity.
+
+        // GIVEN
         val existingEmail = "clinton.harris59@example"
         val password = "123456"
+
+        // WHEN
+        presenter.onLoginButtonClicked(existingEmail, password)
+
+        verify(view.goToHomePage(), times(1))
     }
 }
