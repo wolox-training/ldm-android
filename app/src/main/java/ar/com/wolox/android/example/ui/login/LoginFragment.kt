@@ -1,15 +1,20 @@
 package ar.com.wolox.android.example.ui.login
 
-import android.util.Log
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentLoginBinding
 import ar.com.wolox.android.example.ui.home.HomeActivity
 import ar.com.wolox.android.example.ui.signup.SignupActivity
+import ar.com.wolox.android.example.utils.toggleVisibilityAnimation
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
+import ar.com.wolox.wolmo.core.util.ToastFactory
 import ar.com.wolox.wolmo.core.util.openBrowser
 import ar.com.wolox.wolmo.core.util.openDial
+import javax.inject.Inject
 
 class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, LoginPresenter>(), LoginView {
+
+    @Inject
+    internal lateinit var toastFactory: ToastFactory
 
     override fun layout() = R.layout.fragment_login
 
@@ -28,7 +33,13 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
 
     override fun goToSignUpPage() = SignupActivity.start(requireContext())
 
-    override fun goToHomePage() = HomeActivity.start(requireContext())
+    override fun toggleSpinnerVisibility(toggle: Boolean) = binding.progressBar.toggleVisibilityAnimation(toggle)
+
+    override fun showIncorrectCredentialsToast() = toastFactory.show(R.string.login_invalid_credentials)
+
+    override fun showNoConnectionToast() = toastFactory.show(R.string.login_connection_error)
+
+    override fun goToHomePage() = HomeActivity.startClearingCurrentTask(requireContext())
 
     override fun openBrowser(url: String) = requireContext().openBrowser(url)
 
@@ -44,11 +55,6 @@ class LoginFragment private constructor() : WolmoFragment<FragmentLoginBinding, 
 
     override fun showEmailInvalidError() {
         binding.email.error = getString(R.string.login_alert_bad_email)
-    }
-
-    override fun showLoginError() {
-        Log.e("Log In Error ", "Invalid Credentials")
-        // Toast message will be implemented in the next card (next Pull Request)
     }
 
     companion object {
