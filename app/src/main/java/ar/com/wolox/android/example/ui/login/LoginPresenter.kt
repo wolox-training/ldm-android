@@ -10,12 +10,6 @@ import javax.inject.Inject
 
 class LoginPresenter @Inject constructor(private val userSession: UserSession, private val userRepository: UserRepository) : CoroutineBasePresenter<LoginView>() {
 
-    override fun onViewAttached() {
-        if (userSession.userIsLogged) {
-            view?.goToHomePage()
-        }
-    }
-
     fun onLoginButtonClicked(email: String, password: String) = launch {
         var errorHappened = false
         if (email.isEmpty()) {
@@ -31,10 +25,12 @@ class LoginPresenter @Inject constructor(private val userSession: UserSession, p
             errorHappened = true
         }
         if (!errorHappened) {
-            userSession.email = email
-            userSession.password = password
             networkRequest(userRepository.authUser(email, password)) {
-                onResponseSuccessful { view?.goToHomePage() }
+                onResponseSuccessful {
+                    userSession.email = email
+                    userSession.password = password
+                    view?.goToHomePage()
+                }
                 onResponseFailed { _, _ -> view?.showLoginError() }
             }
         }

@@ -16,7 +16,9 @@ class NetworkBuilder<T> {
 
     fun build(networkResponse: NetworkResponse<Response<T>>) {
         return when (networkResponse) {
-            is NetworkResponse.Success -> onResponseSuccessful.invoke(networkResponse.response.body())
+            is NetworkResponse.Success -> {
+                onResponseSuccessful.invoke(networkResponse.response.body())
+            }
             is NetworkResponse.Error -> onResponseFailed.invoke(networkResponse.response.errorBody(), networkResponse.response.code())
             is NetworkResponse.Failure -> onCallFailure.invoke(networkResponse.t)
         }
