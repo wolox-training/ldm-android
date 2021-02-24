@@ -13,12 +13,6 @@ class LoginPresenter @Inject constructor(
     private val userRepository: UserRepository
 ) : CoroutineBasePresenter<LoginView>() {
 
-    override fun onViewAttached() {
-        if (userSession.userIsLogged) {
-            view?.goToHomePage()
-        }
-    }
-
     fun onLoginButtonClicked(email: String, password: String) = launch {
         var errorHappened = false
         if (email.isEmpty()) {
