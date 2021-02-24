@@ -13,6 +13,12 @@ class LoginPresenter @Inject constructor(
     private val userRepository: UserRepository
 ) : CoroutineBasePresenter<LoginView>() {
 
+    private var loading = false
+        set(value) {
+            field = value
+            view?.toggleSpinnerVisibility(value)
+        }
+
     fun onLoginButtonClicked(email: String, password: String) = launch {
         var errorHappened = false
         if (email.isEmpty()) {
@@ -28,7 +34,7 @@ class LoginPresenter @Inject constructor(
             errorHappened = true
         }
         if (!errorHappened) {
-            view?.toggleSpinnerVisibility(SHOW_SPINNER)
+            loading = true
             networkRequest(userRepository.authUser(email, password)) {
                 onResponseSuccessful {
                     userSession.email = email
@@ -38,7 +44,7 @@ class LoginPresenter @Inject constructor(
                 onResponseFailed { _, _ -> view?.showIncorrectCredentialsToast() }
                 onCallFailure { view?.showNoConnectionToast() }
             }
-            view?.toggleSpinnerVisibility(HIDE_SPINNER)
+            loading = false
         }
     }
 
