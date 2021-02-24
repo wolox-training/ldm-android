@@ -4,6 +4,4 @@ interface SplashView {
     fun goToHomeScreen()
 
     fun goToLogInScreen()
-
-    fun waitAnimation()
 }

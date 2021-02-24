@@ -15,12 +15,9 @@ class SplashFragment private constructor() : WolmoFragment<FragmentSplashBinding
         binding.woloxSplashLogo.fadeInAnimation { presenter.onAnimationFinish() }
     }
 
-    override fun goToHomeScreen() = HomeActivity.start(requireContext())
+    override fun goToHomeScreen() = HomeActivity.startClearingCurrentTask(requireContext())
 
-    override fun goToLogInScreen() = LoginActivity.start(requireContext())
-
-    override fun waitAnimation() {
-    }
+    override fun goToLogInScreen() = LoginActivity.startClearingCurrentTask(requireContext())
 
     companion object {
         fun newInstance() = SplashFragment()
