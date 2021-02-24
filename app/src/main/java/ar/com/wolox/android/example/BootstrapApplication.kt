@@ -1,6 +1,5 @@
 package ar.com.wolox.android.example
 
-import android.util.Log
 import ar.com.wolox.android.BuildConfig
 import ar.com.wolox.android.example.di.DaggerAppComponent
 import ar.com.wolox.android.example.network.NetworkHeaders
