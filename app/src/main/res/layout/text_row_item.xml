@@ -1,0 +1,13 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/static_spacing_medium_extra"
+    android:layout_marginStart="@dimen/static_spacing_small"
+    android:layout_marginEnd="@dimen/static_spacing_small"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/newsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sample Text"/>
+</FrameLayout>
