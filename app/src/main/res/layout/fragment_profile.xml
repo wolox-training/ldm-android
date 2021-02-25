@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_medium_more"
             android:gravity="center"
-            android:text="@string/profile_fragment_titile"
+            android:text="@string/profile_fragment_title"
             android:textSize="@dimen/font_medium_extra"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

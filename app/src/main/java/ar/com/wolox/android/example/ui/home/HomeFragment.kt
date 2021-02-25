@@ -5,6 +5,7 @@ import ar.com.wolox.android.databinding.FragmentHomeBinding
 import ar.com.wolox.android.example.ui.home.news.NewsFragment
 import ar.com.wolox.android.example.ui.home.profile.ProfileFragment
 import ar.com.wolox.android.example.ui.login.LoginActivity
+import ar.com.wolox.android.example.utils.enableTabColorChange
 import ar.com.wolox.wolmo.core.adapter.viewpager.SimpleFragmentPagerAdapter
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import javax.inject.Inject
@@ -25,9 +26,27 @@ class HomeFragment : WolmoFragment<FragmentHomeBinding, HomePresenter>(), HomeVi
                         profileFragment to "Page 2"
                 )
             }
-            tabLayout.addTab(tabLayout.newTab().setText("Text 1"))
-            tabLayout.addTab(tabLayout.newTab().setText("Text 2"))
             tabLayout.setupWithViewPager(viewPager)
+            for (i in 0 until tabLayout.tabCount) {
+                tabLayout.getTabAt(i)!!.apply {
+                    text = getString(TabsData.tabArrayText[i])
+                    setIcon(if (i == 0) TabsData.tabArrayIconsON[i] else TabsData.tabArrayIconsOFF[i])
+                }
+            }
+            tabLayout.enableTabColorChange()
+/*
+* The same code is in "ViewExtensions.kt", left here because I don't know if its better to have it there.
+tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    tab.setIcon(TabsData.tabArrayIconsON[tab.position])
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab) {
+                    tab.setIcon(TabsData.tabArrayIconsOFF[tab.position])
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab) {}
+            })*/
         }
     }
 
