@@ -23,13 +23,14 @@
     <string name="signup_screen_confirm_password_hint">Confirm password.</string>
     <string name="signup_screen_header_text">Sign Up.</string>
     <string name="home_screen_header_text">Wolox.</string>
-
-
+    <string name="news_fragment_title">News</string>
+    <string name="profile_fragment_title">Profile</string>
 
     <!-- Error Messages -->
     <string name="login_alert_input">You must fill all the fields.</string>
     <string name="login_alert_bad_email">Invalid email format.</string>
     <string name="login_invalid_credentials">Invalid credentials. Check your username or password.</string>
     <string name="login_connection_error">No internet connection found.</string>
+    <string name="woloxLogoContentDesc">Wolox Logo</string>
 
 </resources>
