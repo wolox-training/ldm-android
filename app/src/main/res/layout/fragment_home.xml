@@ -6,17 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <View
-            android:visibility="gone"
-            android:id="@+id/headerSeparator"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_tiniest"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:background="@color/cardview_dark_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signUpText" />
-
         <TextView
             android:id="@+id/signUpText"
             android:layout_width="@dimen/signup_title"
@@ -33,29 +22,27 @@
             android:layout_width="@dimen/wolox_logo_signup_width"
             android:layout_height="@dimen/wolox_logo_signup_height"
             android:layout_marginStart="@dimen/spacing_large"
-            app:layout_constraintBottom_toTopOf="@+id/headerSeparator"
+            android:layout_marginTop="@dimen/static_spacing_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/wolox_logo"
-            android:contentDescription="TODO" />
+            android:contentDescription="@string/woloxLogoContentDesc" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/spacing_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView">
-
-        </com.google.android.material.tabs.TabLayout>
+            app:layout_constraintTop_toBottomOf="@id/imageView"/>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tabLayout"></androidx.viewpager.widget.ViewPager>
+            app:layout_constraintTop_toBottomOf="@id/tabLayout"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

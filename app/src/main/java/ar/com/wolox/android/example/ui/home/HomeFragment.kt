@@ -22,8 +22,8 @@ class HomeFragment : WolmoFragment<FragmentHomeBinding, HomePresenter>(), HomeVi
         with(binding) {
             viewPager.adapter = SimpleFragmentPagerAdapter(childFragmentManager).apply {
                 addFragments(
-                        newsFragment to "NewsFragment",
-                        profileFragment to "ProfileFragment"
+                        newsFragment to NEWS_FRAGMENT,
+                        profileFragment to PROFILE_FRAGMENT
                 )
             }
             tabLayout.setupWithViewPager(viewPager)
@@ -46,6 +46,8 @@ class HomeFragment : WolmoFragment<FragmentHomeBinding, HomePresenter>(), HomeVi
 
     companion object {
         fun newInstance() = HomeFragment()
+        private const val NEWS_FRAGMENT = "NewsFragment"
+        private const val PROFILE_FRAGMENT = "ProfileFragment"
     }
 
     override fun goToLoginPage() = LoginActivity.start(requireContext())
