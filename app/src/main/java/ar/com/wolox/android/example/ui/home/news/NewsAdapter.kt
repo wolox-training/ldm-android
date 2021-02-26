@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 
-class NewsAdapter(private val dataSet: Array<String>) :
+class NewsAdapter(private val dataSet: List<String>) :
         RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
     /**
@@ -27,7 +27,6 @@ class NewsAdapter(private val dataSet: Array<String>) :
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
                 .inflate(R.layout.text_row_item, viewGroup, false)
-
         return ViewHolder(view)
     }
 
@@ -36,7 +35,7 @@ class NewsAdapter(private val dataSet: Array<String>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = dataSet[position]
+        dataSet[position].also { viewHolder.textView.text = it }
     }
 
     // Return the size of your dataset (invoked by the layout manager)

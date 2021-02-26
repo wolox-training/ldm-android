@@ -33,4 +33,11 @@
     <string name="login_connection_error">No internet connection found.</string>
     <string name="woloxLogoContentDesc">Wolox Logo</string>
 
+
+    <!--News Messages -->
+    <string name="lorem_ipsum_paragraph">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Phasellus imperdiet arcu tortor, sed suscipit neque tristique vitae.
+    </string>
+
 </resources>
