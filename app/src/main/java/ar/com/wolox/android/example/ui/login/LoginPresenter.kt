@@ -20,41 +20,31 @@ class LoginPresenter @Inject constructor(
         }
 
     fun onLoginButtonClicked(email: String, password: String) = launch {
-        // The next email, username and access token is only set as testing purposes. On final version
-        // Will been deleted
-
-        if (email == "TEST" && password == "TEST") {
-            userSession.email = "test@mail.com"
-            userSession.password = "imaginarypassword"
-            userSession.accessToken = "4cc35570k3n"
-            view?.goToHomePage()
-        } else {
-            var errorHappened = false
-            if (email.isEmpty()) {
-                view?.showEmptyEmailError()
-                errorHappened = true
-            }
-            if (password.isEmpty()) {
-                view?.showEmptyPasswordError()
-                errorHappened = true
-            }
-            if (email.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                view?.showEmailInvalidError()
-                errorHappened = true
-            }
-            if (!errorHappened) {
-                loading = true
-                networkRequest(userRepository.authUser(email, password)) {
-                    onResponseSuccessful {
-                        userSession.email = email
-                        userSession.password = password
-                        view?.goToHomePage()
-                    }
-                    onResponseFailed { _, _ -> view?.showIncorrectCredentialsToast() }
-                    onCallFailure { view?.showNoConnectionToast() }
+        var errorHappened = false
+        if (email.isEmpty()) {
+            view?.showEmptyEmailError()
+            errorHappened = true
+        }
+        if (password.isEmpty()) {
+            view?.showEmptyPasswordError()
+            errorHappened = true
+        }
+        if (email.isNotEmpty() && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            view?.showEmailInvalidError()
+            errorHappened = true
+        }
+        if (!errorHappened) {
+            loading = true
+            networkRequest(userRepository.authUser(email, password)) {
+                onResponseSuccessful {
+                    userSession.email = email
+                    userSession.password = password
+                    view?.goToHomePage()
                 }
-                loading = false
+                onResponseFailed { _, _ -> view?.showIncorrectCredentialsToast() }
+                onCallFailure { view?.showNoConnectionToast() }
             }
+            loading = false
         }
     }
 
