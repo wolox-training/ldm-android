@@ -11,16 +11,17 @@ import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.New
 import kotlin.random.Random
 
-class NewsAdapter(private val dataSet: List<New>) :
+class NewsAdapter(private val dataSet: ArrayList<New>) :
         RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
-    private val news: MutableList<New> = dataSet.toMutableList()
+    private var news: ArrayList<New> = dataSet
 
-    private fun MutableList<New>.prependAll(l: List<New>) {
+    private fun ArrayList<New>.prependAll(l: ArrayList<New>) {
         l.forEach { any -> add(0, any) }
     }
 
-    fun updateNews(newNews: List<New>) {
-        news.prependAll(newNews)
+    fun updateNews(newNews: ArrayList<New>) {
+        // newNews were sorted by time in the presenter
+        news = newNews
     }
 
     /**

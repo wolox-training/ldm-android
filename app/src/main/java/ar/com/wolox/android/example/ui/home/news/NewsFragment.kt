@@ -12,7 +12,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
     @Inject
     internal lateinit var toastFactory: ToastFactory
 
-    private var newsAdapter: NewsAdapter = NewsAdapter(listOf())
+    private var newsAdapter: NewsAdapter = NewsAdapter(arrayListOf())
 
     override fun init() {}
 
@@ -32,12 +32,12 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
 
     override fun showNoNetworkAlert() = toastFactory.show(R.string.connection_error)
 
-    override fun updateNews(news: List<New>) {
+    override fun updateNews(news: ArrayList<New>) {
         newsAdapter.updateNews(news)
         newsAdapter.notifyDataSetChanged()
     }
 
-    override fun showNews(news: List<New>) {
+    override fun showNews(news: ArrayList<New>) {
         newsAdapter = NewsAdapter(news)
         binding.recyclerView.adapter = newsAdapter
     }
