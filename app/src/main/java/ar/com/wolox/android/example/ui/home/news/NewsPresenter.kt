@@ -1,11 +1,18 @@
 package ar.com.wolox.android.example.ui.home.news
 
-import ar.com.wolox.android.example.model.New
+import android.util.Log
+import ar.com.wolox.android.example.model.NewData
+import ar.com.wolox.android.example.network.builder.networkRequest
+import ar.com.wolox.android.example.network.repository.NewRepository
 import ar.com.wolox.android.example.utils.UserSession
-import ar.com.wolox.wolmo.core.presenter.BasePresenter
+import ar.com.wolox.wolmo.core.presenter.CoroutineBasePresenter
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class NewsPresenter @Inject constructor(private val userSession: UserSession) : BasePresenter<NewsView>() {
+class NewsPresenter @Inject constructor(
+    private val userSession: UserSession,
+    private val newRepository: NewRepository
+) : CoroutineBasePresenter<NewsView>() {
 
     override fun onViewAttached() {
         super.onViewAttached()
@@ -13,41 +20,32 @@ class NewsPresenter @Inject constructor(private val userSession: UserSession) : 
     }
 
     // The presenter stores the news retrieved from backend.
-    private var news: ArrayList<New> = arrayListOf()
+    private var news: ArrayList<NewData> = arrayListOf()
 
-    private fun fetchNews() { // In the next card, this method will hit the backend to retrieve the first list of news.
-        news = arrayListOf(
-                NEWS[0],
-                NEWS[1],
-                NEWS[2],
-                NEWS[3],
-                NEWS[4]
-        )
-        view?.showNews(news)
+    private var currentPage: Int = 1
+
+    private fun fetchNews() = launch { // In the next card, this method will hit the backend to retrieve the first list of news.
+        networkRequest(newRepository.getNews(currentPage)) {
+            onResponseSuccessful {
+                news = it!!.page
+                view?.showNews(news)
+                currentPage++
+            }
+            onResponseFailed { e, m -> Log.i("NewsRequest", "Request failed : $e - $m") }
+            onCallFailure { e -> Log.i("NewsRequest", "Request failed : $e") }
+        }
     }
 
-    fun updateNews() { // In the next card, this method will hit the backend to retrieve more news, and put it them into the current list.
-        val newsFetched = arrayListOf<New>()
-        news.addAll(newsFetched)
-        // Sort news by date
-        val anyNews = newsFetched.isNotEmpty()
-        if (anyNews) view?.updateNews(news) else view?.showNoNewNewsAlert()
-    }
-
-    companion object {
-        private const val LIPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-        private val NEWS = arrayListOf(
-                New("News nº 1", LIPSUM, "", "15m"),
-                New("News nº 2", LIPSUM, "", "15m"),
-                New("News nº 3", LIPSUM, "", "15m"),
-                New("News nº 4", LIPSUM, "", "15m"),
-                New("News nº 5", LIPSUM, "", "15m"),
-                New("News nº 6", LIPSUM, "", "15m"),
-                New("News nº 7", LIPSUM, "", "15m"),
-                New("News nº 8", LIPSUM, "", "15m"),
-                New("News nº 9", LIPSUM, "", "15m"),
-                New("News nº 10", LIPSUM, "", "15m"),
-                New("News nº 11", LIPSUM, "", "15m")
-        )
+    fun updateNews() = launch { // In the next card, this method will hit the backend to retrieve more news, and put it them into the current list.
+        networkRequest(newRepository.getNews(currentPage)) {
+            onResponseSuccessful {
+                currentPage++
+                news.addAll(it!!.page)
+                // TODO : Sort by new
+                if (it.page.isNotEmpty()) view?.updateNews(news) else view?.showNoNewNewsAlert()
+            }
+            onResponseFailed { e, m -> Log.i("NewsRequest", "Request failed : $e - $m") }
+            onCallFailure { e -> Log.i("NewsRequest", "Request failed : $e") }
+        }
     }
 }
