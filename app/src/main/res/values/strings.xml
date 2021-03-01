@@ -26,11 +26,21 @@
     <string name="news_fragment_title">News</string>
     <string name="profile_fragment_title">Profile</string>
 
-    <!-- Error Messages -->
+    <!-- Errors and alerts Messages -->
     <string name="login_alert_input">You must fill all the fields.</string>
     <string name="login_alert_bad_email">Invalid email format.</string>
     <string name="login_invalid_credentials">Invalid credentials. Check your username or password.</string>
     <string name="login_connection_error">No internet connection found.</string>
+    <string name="zero_news_alert">There are no news for you :(</string>
+    <string name="connection_error">No internet connection found.</string>
+
+    <!-- Misc -->
     <string name="woloxLogoContentDesc">Wolox Logo</string>
+
+    <!--News Messages -->
+    <string name="lorem_ipsum_paragraph">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Phasellus imperdiet arcu tortor, sed suscipit neque tristique vitae.
+    </string>
 
 </resources>
