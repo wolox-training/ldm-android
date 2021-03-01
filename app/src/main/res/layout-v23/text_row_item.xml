@@ -65,14 +65,16 @@
         app:layout_constraintTop_toBottomOf="@+id/newsTitle"
         />
 
-    <ImageButton
+    <ToggleButton
         android:id="@+id/newsLikeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_like_off"
-        app:layout_constraintStart_toEndOf="@id/newsBody"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/newsTimeAgo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/like_button_selector"
+        android:checked="false"
+        android:textOff=''
+        android:textOn=''
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/newsBody"
+        app:layout_constraintTop_toBottomOf="@id/newsTimeAgo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,19 +5,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
-import ar.com.wolox.android.example.model.News
+import ar.com.wolox.android.example.model.New
+import kotlin.random.Random
 
-class NewsAdapter(private val dataSet: List<News>) :
+class NewsAdapter(private val dataSet: List<New>) :
         RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
-    private val news: MutableList<News> = dataSet.toMutableList()
+    private val news: MutableList<New> = dataSet.toMutableList()
 
-    private fun MutableList<News>.prependAll(l: List<News>) {
+    private fun MutableList<New>.prependAll(l: List<New>) {
         l.forEach { any -> add(0, any) }
     }
 
-    fun updateNews(newNews: List<News>) {
+    fun updateNews(newNews: List<New>) {
         news.prependAll(newNews)
     }
 
@@ -30,10 +32,9 @@ class NewsAdapter(private val dataSet: List<News>) :
         val body: TextView = view.findViewById(R.id.newsBody)
         val image: ImageView = view.findViewById(R.id.newsImage)
         val timeAgo: TextView = view.findViewById(R.id.newsTimeAgo)
-
-        init {
-            // Define click listener for the ViewHolder's View.
-        }
+        val likeState: ToggleButton = view.findViewById(R.id.newsLikeButton)
+        // Define click listener for the ViewHolder's View.
+        init {}
     }
 
     // Create new views (invoked by the layout manager)
@@ -53,6 +54,9 @@ class NewsAdapter(private val dataSet: List<News>) :
             viewHolder.title.text = it.title
             viewHolder.body.text = it.body
             viewHolder.timeAgo.text = it.time
+            if (Random.nextInt(0, 10) > 4) {
+                viewHolder.likeState.toggle()
+            }
         }
     }
 
