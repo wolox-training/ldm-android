@@ -9,10 +9,16 @@ import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.NewData
+import org.joda.time.format.DateTimeFormat
+import org.ocpsoft.prettytime.PrettyTime
+import java.util.Locale
+import kotlin.collections.ArrayList
 
 class NewsAdapter(private val dataSet: ArrayList<NewData>) :
         RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     private var news: ArrayList<NewData> = dataSet
+
+    private var prettyTime = PrettyTime()
 
     fun updateNews(newNews: ArrayList<NewData>) {
         // newNews were sorted by time in the presenter
@@ -41,6 +47,13 @@ class NewsAdapter(private val dataSet: ArrayList<NewData>) :
         return ViewHolder(view)
     }
 
+    private fun formatTime(date: String): String? {
+        val formatter = DateTimeFormat.forPattern("yyyy-MM-dd")
+        val dateTime = formatter.parseDateTime(date)
+        val prettyTime = PrettyTime(Locale.getDefault())
+        return prettyTime.format(dateTime.toDate())
+    }
+
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
@@ -49,7 +62,7 @@ class NewsAdapter(private val dataSet: ArrayList<NewData>) :
         news[position].also {
             viewHolder.commenter.text = it.commenter
             viewHolder.comment.text = it.comment
-            viewHolder.timeAgo.text = it.date
+            viewHolder.timeAgo.text = formatTime(it.date)
         }
     }
 

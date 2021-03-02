@@ -33,6 +33,7 @@
     <string name="login_connection_error">No internet connection found.</string>
     <string name="zero_news_alert">There are no news for you :(</string>
     <string name="connection_error">No internet connection found.</string>
+    <string name="total_pages_reached_alert">There aren\'t more pages to be shown.</string>
 
     <!-- Misc -->
     <string name="woloxLogoContentDesc">Wolox Logo</string>

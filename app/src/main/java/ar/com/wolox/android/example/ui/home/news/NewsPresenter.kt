@@ -8,6 +8,7 @@ import ar.com.wolox.android.example.utils.UserSession
 import ar.com.wolox.wolmo.core.presenter.CoroutineBasePresenter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class NewsPresenter @Inject constructor(
     private val userSession: UserSession,
@@ -23,29 +24,39 @@ class NewsPresenter @Inject constructor(
     private var news: ArrayList<NewData> = arrayListOf()
 
     private var currentPage: Int = 1
+    private var totalPages: Int = 1
 
-    private fun fetchNews() = launch { // In the next card, this method will hit the backend to retrieve the first list of news.
+    private fun fetchNews() = launch {
         networkRequest(newRepository.getNews(currentPage)) {
-            onResponseSuccessful {
-                news = it!!.page
-                view?.showNews(news)
+            onResponseSuccessful { it ->
+                totalPages = it!!.totalPages
+                news = it.page
+                news.sortByDescending { newDate -> newDate.date }
                 currentPage++
             }
-            onResponseFailed { e, m -> Log.i("NewsRequest", "Request failed : $e - $m") }
-            onCallFailure { e -> Log.i("NewsRequest", "Request failed : $e") }
+            onResponseFailed { e, m -> Log.i("NewsRequest", "Request failed : $e - $m") } // TODO Maybe of failed credentials, send user to login.
+            onCallFailure { view?.showNoNetworkAlert() }
         }
+        view?.showNews(news)
     }
 
-    fun updateNews() = launch { // In the next card, this method will hit the backend to retrieve more news, and put it them into the current list.
-        networkRequest(newRepository.getNews(currentPage)) {
-            onResponseSuccessful {
-                currentPage++
-                news.addAll(it!!.page)
-                // TODO : Sort by new
-                if (it.page.isNotEmpty()) view?.updateNews(news) else view?.showNoNewNewsAlert()
+    fun updateNews(updateInvokeMethod: UpdateInvokeMethod) = launch {
+        if (currentPage <= totalPages) {
+            networkRequest(newRepository.getNews(currentPage)) {
+                onResponseSuccessful {
+                    totalPages = it!!.totalPages
+                    when (updateInvokeMethod) {
+                        UpdateInvokeMethod.SCROLL -> news.addAll(it.page)
+                        else -> news.addAll(0, it.page)
+                    }
+                    currentPage++
+                    if (it.page.isNotEmpty()) view?.updateNews(news) else view?.showNoNewNewsAlert()
+                }
+                onResponseFailed { e, m -> Log.i("NewsRequest", "Request failed : $e - $m") }
+                onCallFailure { view?.showNoNetworkAlert() }
             }
-            onResponseFailed { e, m -> Log.i("NewsRequest", "Request failed : $e - $m") }
-            onCallFailure { e -> Log.i("NewsRequest", "Request failed : $e") }
+        } else {
+            view?.showTotalPagesReachedAlert()
         }
     }
 }
