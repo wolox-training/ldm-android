@@ -2,7 +2,8 @@ package ar.com.wolox.android.example.ui.home.news
 
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentNewsBinding
-import ar.com.wolox.android.example.model.New
+import ar.com.wolox.android.example.model.NewData
+import ar.com.wolox.android.example.utils.infiniteScroll
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.util.ToastFactory
 import javax.inject.Inject
@@ -21,9 +22,12 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
     override fun setListeners() {
         super.setListeners()
         with(binding) {
-            swipeRefresh.setOnRefreshListener { // Since the backend was not implemented yet, the animation doesn't last much.
-                presenter.updateNews()
+            swipeRefresh.setOnRefreshListener {
+                presenter.updateNews(UpdateInvokeMethod.PULL_DOWN)
                 swipeRefresh.isRefreshing = false
+            }
+            recyclerView.infiniteScroll {
+                presenter.updateNews(UpdateInvokeMethod.SCROLL)
             }
         }
     }
@@ -32,12 +36,14 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
 
     override fun showNoNetworkAlert() = toastFactory.show(R.string.connection_error)
 
-    override fun updateNews(news: ArrayList<New>) {
+    override fun showTotalPagesReachedAlert() = toastFactory.show(R.string.total_pages_reached_alert)
+
+    override fun updateNews(news: ArrayList<NewData>) {
         newsAdapter.updateNews(news)
         newsAdapter.notifyDataSetChanged()
     }
 
-    override fun showNews(news: ArrayList<New>) {
+    override fun showNews(news: ArrayList<NewData>) {
         newsAdapter = NewsAdapter(news)
         binding.recyclerView.adapter = newsAdapter
     }

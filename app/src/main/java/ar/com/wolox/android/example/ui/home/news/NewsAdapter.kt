@@ -8,18 +8,19 @@ import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.wolox.android.R
-import ar.com.wolox.android.example.model.New
-import kotlin.random.Random
+import ar.com.wolox.android.example.model.NewData
+import org.joda.time.format.DateTimeFormat
+import org.ocpsoft.prettytime.PrettyTime
+import java.util.Locale
+import kotlin.collections.ArrayList
 
-class NewsAdapter(private val dataSet: ArrayList<New>) :
+class NewsAdapter(private val dataSet: ArrayList<NewData>) :
         RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
-    private var news: ArrayList<New> = dataSet
+    private var news: ArrayList<NewData> = dataSet
 
-    private fun ArrayList<New>.prependAll(l: ArrayList<New>) {
-        l.forEach { any -> add(0, any) }
-    }
+    private var prettyTime = PrettyTime()
 
-    fun updateNews(newNews: ArrayList<New>) {
+    fun updateNews(newNews: ArrayList<NewData>) {
         // newNews were sorted by time in the presenter
         news = newNews
     }
@@ -29,8 +30,8 @@ class NewsAdapter(private val dataSet: ArrayList<New>) :
      * (custom ViewHolder).
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.newsTitle)
-        val body: TextView = view.findViewById(R.id.newsBody)
+        val commenter: TextView = view.findViewById(R.id.newsTitle)
+        val comment: TextView = view.findViewById(R.id.newsBody)
         val image: ImageView = view.findViewById(R.id.newsImage)
         val timeAgo: TextView = view.findViewById(R.id.newsTimeAgo)
         val likeState: ToggleButton = view.findViewById(R.id.newsLikeButton)
@@ -46,18 +47,22 @@ class NewsAdapter(private val dataSet: ArrayList<New>) :
         return ViewHolder(view)
     }
 
+    private fun formatTime(date: String): String? {
+        val formatter = DateTimeFormat.forPattern("yyyy-MM-dd")
+        val dateTime = formatter.parseDateTime(date)
+        val prettyTime = PrettyTime(Locale.getDefault())
+        return prettyTime.format(dateTime.toDate())
+    }
+
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         news[position].also {
-            viewHolder.title.text = it.title
-            viewHolder.body.text = it.body
-            viewHolder.timeAgo.text = it.time
-            if (Random.nextInt(0, 10) > 4) {
-                viewHolder.likeState.toggle()
-            }
+            viewHolder.commenter.text = it.commenter
+            viewHolder.comment.text = it.comment
+            viewHolder.timeAgo.text = formatTime(it.date)
         }
     }
 
