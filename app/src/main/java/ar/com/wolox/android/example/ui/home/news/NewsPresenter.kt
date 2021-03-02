@@ -1,6 +1,5 @@
 package ar.com.wolox.android.example.ui.home.news
 
-import android.util.Log
 import ar.com.wolox.android.example.model.New
 import ar.com.wolox.android.example.network.builder.networkRequest
 import ar.com.wolox.android.example.network.repository.NewRepository
@@ -34,7 +33,7 @@ class NewsPresenter @Inject constructor(
                 news.sortByDescending { newDate -> newDate.date }
                 currentPage++
             }
-            onResponseFailed { _,_ -> view?.showWrongCredentialsAlert() }
+            onResponseFailed { _, _ -> view?.showWrongCredentialsAlert() }
             onCallFailure { view?.showNoNetworkAlert() }
         }
         view?.showNews(news)
@@ -52,7 +51,7 @@ class NewsPresenter @Inject constructor(
                     currentPage++
                     if (it.page.isNotEmpty()) view?.updateNews(news) else view?.showNoNewNewsAlert()
                 }
-                onResponseFailed { _,_ -> view?.showWrongCredentialsAlert() }
+                onResponseFailed { _, _ -> view?.showWrongCredentialsAlert() }
                 onCallFailure { view?.showNoNetworkAlert() }
             }
         } else {
