@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="@color/colorAccent">
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/static_spacing_medium"
+                android:background="#00FFFFFF"
+                android:src="@drawable/ic_baseline_arrow_back_24" />
+            <TextView
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/static_spacing_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_huge"
+                android:textColor="@color/fullWhite"
+                android:text="Post"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/static_spacing_medium">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="3 months ago"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium_more"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_big"
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimary"
+                />
+            <TextView
+                android:padding="@dimen/spacing_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem_ipsum_paragraph"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_huge"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+                <ToggleButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:textOff=""
+                    android:textOn=""
+                    android:background="@drawable/like_button_selector" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

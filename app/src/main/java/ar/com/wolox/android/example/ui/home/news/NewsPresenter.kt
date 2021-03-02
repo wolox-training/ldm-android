@@ -1,7 +1,7 @@
 package ar.com.wolox.android.example.ui.home.news
 
 import android.util.Log
-import ar.com.wolox.android.example.model.NewData
+import ar.com.wolox.android.example.model.New
 import ar.com.wolox.android.example.network.builder.networkRequest
 import ar.com.wolox.android.example.network.repository.NewRepository
 import ar.com.wolox.android.example.utils.UserSession
@@ -21,7 +21,7 @@ class NewsPresenter @Inject constructor(
     }
 
     // The presenter stores the news retrieved from backend.
-    private var news: ArrayList<NewData> = arrayListOf()
+    private var news: ArrayList<New> = arrayListOf()
 
     private var currentPage: Int = 1
     private var totalPages: Int = 1
@@ -34,7 +34,7 @@ class NewsPresenter @Inject constructor(
                 news.sortByDescending { newDate -> newDate.date }
                 currentPage++
             }
-            onResponseFailed { e, m -> Log.i("NewsRequest", "Request failed : $e - $m") } // TODO Maybe of failed credentials, send user to login.
+            onResponseFailed { _,_ -> view?.showWrongCredentialsAlert() }
             onCallFailure { view?.showNoNetworkAlert() }
         }
         view?.showNews(news)
@@ -52,7 +52,7 @@ class NewsPresenter @Inject constructor(
                     currentPage++
                     if (it.page.isNotEmpty()) view?.updateNews(news) else view?.showNoNewNewsAlert()
                 }
-                onResponseFailed { e, m -> Log.i("NewsRequest", "Request failed : $e - $m") }
+                onResponseFailed { _,_ -> view?.showWrongCredentialsAlert() }
                 onCallFailure { view?.showNoNetworkAlert() }
             }
         } else {

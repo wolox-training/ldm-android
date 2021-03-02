@@ -2,7 +2,7 @@ package ar.com.wolox.android.example.ui.home.news
 
 import ar.com.wolox.android.R
 import ar.com.wolox.android.databinding.FragmentNewsBinding
-import ar.com.wolox.android.example.model.NewData
+import ar.com.wolox.android.example.model.New
 import ar.com.wolox.android.example.utils.infiniteScroll
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.util.ToastFactory
@@ -38,12 +38,14 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
 
     override fun showTotalPagesReachedAlert() = toastFactory.show(R.string.total_pages_reached_alert)
 
-    override fun updateNews(news: ArrayList<NewData>) {
+    override fun showWrongCredentialsAlert() = toastFactory.show(R.string.wrong_credentials_alert)
+
+    override fun updateNews(news: ArrayList<New>) {
         newsAdapter.updateNews(news)
         newsAdapter.notifyDataSetChanged()
     }
 
-    override fun showNews(news: ArrayList<NewData>) {
+    override fun showNews(news: ArrayList<New>) {
         newsAdapter = NewsAdapter(news)
         binding.recyclerView.adapter = newsAdapter
     }
