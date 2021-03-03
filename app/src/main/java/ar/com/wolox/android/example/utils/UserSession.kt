@@ -42,6 +42,12 @@ class UserSession @Inject constructor(private val sharedPreferencesManager: Shar
             sharedPreferencesManager.store(NetworkHeaders.CLIENT, accessToken)
         }
 
+    var id: Int?
+        get() = sharedPreferencesManager[Extras.UserLogin.ID, -1]
+        set(id: Int?) {
+            sharedPreferencesManager.store(Extras.UserLogin.ID, id!!)
+        }
+
     val userIsLogged: Boolean
         get() = !accessToken.isNullOrEmpty()
 }

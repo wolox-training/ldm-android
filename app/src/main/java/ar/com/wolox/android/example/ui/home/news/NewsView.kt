@@ -7,6 +7,10 @@ interface NewsView {
 
     fun updateNews(news: ArrayList<New>)
 
+    fun toggleLikeButton(likesArray: ArrayList<Int>): Boolean
+
+    fun disableSwipeRefreshLoader()
+
     fun showNoNewNewsAlert()
 
     fun showNoNetworkAlert()
@@ -14,4 +18,6 @@ interface NewsView {
     fun showTotalPagesReachedAlert()
 
     fun showWrongCredentialsAlert()
+
+    fun showLikeNewNotification()
 }

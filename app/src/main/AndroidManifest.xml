@@ -38,6 +38,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".example.ui.home.news.details.NewDetailsActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
