@@ -96,11 +96,23 @@ class NewsPresenter @Inject constructor(
         if (!activeCoroutine) {
             activeCoroutine = true
             networkRequest(newRepository.updateLike(newId)) {
-                onResponseSuccessful { m -> view?.showLikeNewNotification() }
+                onResponseSuccessful {
+                    view?.showLikeNewNotification()
+                    news.find {
+                        it.id == newId
+                    }.run {
+                        if (userSession.id in this!!.likes) {
+                            this.likes.remove(userSession.id)
+                        } else {
+                            this.likes.add(userSession.id!!)
+                        }
+                    }
+                }
                 onResponseFailed { _, _ -> view?.showWrongCredentialsAlert() }
                 onCallFailure { view?.showNoNetworkAlert() }
             }
             activeCoroutine = false
+            view?.updateNews(news)
         }
     }
 
