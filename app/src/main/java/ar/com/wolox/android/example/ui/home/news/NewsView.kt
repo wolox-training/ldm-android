@@ -10,4 +10,8 @@ interface NewsView {
     fun showNoNewNewsAlert()
 
     fun showNoNetworkAlert()
+
+    fun showTotalPagesReachedAlert()
+
+    fun showWrongCredentialsAlert()
 }
