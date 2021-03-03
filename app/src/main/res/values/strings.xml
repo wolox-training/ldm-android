@@ -35,6 +35,7 @@
     <string name="connection_error">No internet connection found.</string>
     <string name="total_pages_reached_alert">There aren\'t more pages to be shown.</string>
     <string name="wrong_credentials_alert">Credentials mismatch, try re-login in.</string>
+    <string name="like_new_notification">Like updated!</string>
 
     <!-- Misc -->
     <string name="woloxLogoContentDesc">Wolox Logo</string>
@@ -44,5 +45,6 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Phasellus imperdiet arcu tortor, sed suscipit neque tristique vitae.
     </string>
+    <string name="go_back">Go back</string>
 
 </resources>

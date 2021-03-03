@@ -3,6 +3,7 @@ package ar.com.wolox.android.example.di
 import android.app.Application
 import ar.com.wolox.android.example.BootstrapApplication
 import ar.com.wolox.android.example.ui.home.HomeModule
+import ar.com.wolox.android.example.ui.home.news.details.NewDetailsModule
 import ar.com.wolox.android.example.ui.login.LoginModule
 import ar.com.wolox.android.example.ui.signup.SignupModule
 import ar.com.wolox.android.example.ui.splashcreen.SplashModule
@@ -20,7 +21,8 @@ import dagger.android.support.AndroidSupportInjectionModule
 @Component(dependencies = [NetworkingComponent::class],
         modules = [AndroidSupportInjectionModule::class, DefaultModule::class, ContextModule::class,
             LoginModule::class, ViewPagerActivityModule::class,
-            SignupModule::class, HomeModule::class, SplashModule::class
+            SignupModule::class, HomeModule::class, SplashModule::class,
+            NewDetailsModule::class
         ])
 interface AppComponent : AndroidInjector<BootstrapApplication> {
 

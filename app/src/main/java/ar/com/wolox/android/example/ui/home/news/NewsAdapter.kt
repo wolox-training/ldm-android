@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.home.news
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +13,17 @@ import ar.com.wolox.android.example.model.New
 import ar.com.wolox.android.example.utils.formatTime
 import kotlin.collections.ArrayList
 
-class NewsAdapter(private val dataSet: ArrayList<New>) :
+class NewsAdapter(dataSet: ArrayList<New>, newsFragment: NewsFragment) :
         RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     private var news: ArrayList<New> = dataSet
+    private val fragment = newsFragment
 
     fun updateNews(newNews: ArrayList<New>) {
-        // newNews were sorted by time in the presenter
+        if (newNews.size % 50 == 0) {
+            if (checkInconsistencies()) {
+                Log.wtf("hay duplicados", "revisar!")
+            }
+        }
         news = newNews
     }
 
@@ -31,6 +37,7 @@ class NewsAdapter(private val dataSet: ArrayList<New>) :
         val image: ImageView = view.findViewById(R.id.newsImage)
         val timeAgo: TextView = view.findViewById(R.id.newsTimeAgo)
         val likeState: ToggleButton = view.findViewById(R.id.newsLikeButton)
+        var id: Int = -1
         // Define click listener for the ViewHolder's View.
         init {}
     }
@@ -45,14 +52,32 @@ class NewsAdapter(private val dataSet: ArrayList<New>) :
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         news[position].also {
+            viewHolder.id = it.id!!
             viewHolder.commenter.text = it.commenter
             viewHolder.comment.text = it.comment
             viewHolder.timeAgo.text = it.date.formatTime()
+            viewHolder.likeState.isChecked = fragment.toggleLikeButton(it.likes)
         }
+        viewHolder.itemView.setOnClickListener {
+            fragment.goToNewDetail(viewHolder.id)
+        }
+        viewHolder.likeState.setOnClickListener {
+            fragment.updateLike(viewHolder.id)
+        }
+    }
+
+    private fun checkInconsistencies(): Boolean {
+        val arrList: ArrayList<Int> = arrayListOf()
+        news.forEach {
+            arrList.add(it.id!!)
+        }
+        arrList.sort()
+        var i = 0
+        while (i < arrList.size - 1 && arrList[i] != arrList[i + 1]) i++
+        return i >= arrList.size
     }
 
     // Return the size of your dataset (invoked by the layout manager)

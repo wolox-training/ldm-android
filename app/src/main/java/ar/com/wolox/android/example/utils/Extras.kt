@@ -13,9 +13,14 @@ object Extras {
     object UserLogin {
         const val EMAIL = "username"
         const val PASSWORD = "password"
+        const val ID = "id"
     }
 
     object ViewPager {
         const val FAVOURITE_COLOR_KEY = "FAVOURITE_COLOR_KEY"
+    }
+
+    object NewDetails {
+        const val NEW_ID = "ID"
     }
 }
