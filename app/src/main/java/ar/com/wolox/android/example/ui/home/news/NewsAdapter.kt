@@ -1,6 +1,5 @@
 package ar.com.wolox.android.example.ui.home.news
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,11 +18,6 @@ class NewsAdapter(dataSet: ArrayList<New>, newsFragment: NewsFragment) :
     private val fragment = newsFragment
 
     fun updateNews(newNews: ArrayList<New>) {
-        if (newNews.size % 50 == 0) {
-            if (checkInconsistencies()) {
-                Log.wtf("hay duplicados", "revisar!")
-            }
-        }
         news = newNews
     }
 
@@ -37,7 +31,7 @@ class NewsAdapter(dataSet: ArrayList<New>, newsFragment: NewsFragment) :
         val image: ImageView = view.findViewById(R.id.newsImage)
         val timeAgo: TextView = view.findViewById(R.id.newsTimeAgo)
         val likeState: ToggleButton = view.findViewById(R.id.newsLikeButton)
-        var id: Int = -1
+        var id: Int = -1 // Initialized in an arbitrary value, because it will be changed as soon the news load.
         // Define click listener for the ViewHolder's View.
         init {}
     }
@@ -67,17 +61,6 @@ class NewsAdapter(dataSet: ArrayList<New>, newsFragment: NewsFragment) :
         viewHolder.likeState.setOnClickListener {
             fragment.updateLike(viewHolder.id)
         }
-    }
-
-    private fun checkInconsistencies(): Boolean {
-        val arrList: ArrayList<Int> = arrayListOf()
-        news.forEach {
-            arrList.add(it.id!!)
-        }
-        arrList.sort()
-        var i = 0
-        while (i < arrList.size - 1 && arrList[i] != arrList[i + 1]) i++
-        return i >= arrList.size
     }
 
     // Return the size of your dataset (invoked by the layout manager)

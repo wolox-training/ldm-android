@@ -12,7 +12,7 @@
         <LinearLayout
             android:id="@+id/newDetailContainer"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="@dimen/new_details_container_height"
             android:background="@drawable/important"
             android:orientation="vertical">
             <LinearLayout
@@ -20,10 +20,10 @@
                 android:layout_height="wrap_content">
                 <ImageButton
                     android:id="@+id/goBack"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/back_button_width"
+                    android:layout_height="@dimen/back_button_height"
                     android:layout_marginStart="@dimen/static_spacing_medium"
-                    android:background="#00FFFFFF"
+                    android:background="@color/transparent"
                     android:src="@drawable/ic_baseline_arrow_back_24" />
                 <TextView
                     android:id="@+id/goBackText"
@@ -59,7 +59,7 @@
                 android:id="@+id/timeAgo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="end"
                 android:text=""
                 />
             <TextView
@@ -89,8 +89,8 @@
                 >
                 <ToggleButton
                     android:id="@+id/likeButton"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/like_button_width"
+                    android:layout_height="@dimen/like_button_height"
                     android:textOff=""
                     android:textOn=""
                     android:background="@drawable/like_button_selector" />
