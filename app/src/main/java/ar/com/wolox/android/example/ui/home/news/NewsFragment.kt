@@ -37,7 +37,9 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
         }
     }
 
-    override fun onUpdateLike(newId: Int) = presenter.onUpdateLike(newId)
+    override fun onUpdateLike(newId: Int) {
+        presenter.onUpdateLike(newId)
+    }
 
     override fun goToNewDetail(id: Int) = NewDetailsActivity.start(requireContext(), id)
 

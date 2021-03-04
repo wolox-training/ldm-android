@@ -12,7 +12,7 @@ interface NewsView {
 
     fun disableSwipeRefreshLoader()
 
-    fun onUpdateLike(newId: Int): Job
+    fun onUpdateLike(newId: Int)
 
     fun goToNewDetail(id: Int)
 
