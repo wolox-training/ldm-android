@@ -7,7 +7,7 @@ data class New(
     val comment: String,
     var date: String,
     val avatar: String,
-    val likes: ArrayList<String>,
+    val likes: ArrayList<Int>,
     val createdAt: String,
     val updatedAt: String
 )

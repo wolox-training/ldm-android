@@ -39,6 +39,7 @@ class LoginPresenter @Inject constructor(
                 onResponseSuccessful {
                     userSession.email = email
                     userSession.password = password
+                    userSession.id = it!!.data.id
                     view?.goToHomePage()
                 }
                 onResponseFailed { _, _ -> view?.showIncorrectCredentialsToast() }

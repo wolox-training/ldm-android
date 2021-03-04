@@ -7,4 +7,5 @@
     <color name="colorAccent">#998DC63F</color>
     <color name="fullWhite">#FFFFFF</color>
     <color name="greyTab">#989898</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

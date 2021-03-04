@@ -71,8 +71,8 @@
 
     <ToggleButton
         android:id="@+id/newsLikeButton"
-        android:layout_width="@dimen/like_logo_width"
-        android:layout_height="@dimen/like_logo_height"
+        android:layout_width="@dimen/like_button_width_small"
+        android:layout_height="@dimen/like_button_height_small"
         android:background="@drawable/like_button_selector"
         android:checked="false"
         android:textOff=""
