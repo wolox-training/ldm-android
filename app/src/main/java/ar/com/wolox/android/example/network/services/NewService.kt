@@ -16,5 +16,5 @@ interface NewService {
     suspend fun getNew(@Path("id") id: Int): Response<New>
 
     @PUT("/comments/like/{id}")
-    suspend fun updateLike(@Path("id") id: Int): Response<Any>
+    suspend fun updateLike(@Path("id") id: Int): Response<Map<String, String>>
 }

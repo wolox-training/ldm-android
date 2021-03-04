@@ -38,13 +38,12 @@ class NewDetailsFragment : WolmoFragment<FragmentNewDetailBinding, NewDetailsPre
     }
 
     override fun renderNew(new: New) {
-        val (_, commenter, comment, date, avatar, likes, _, _) = new
+        val (_, commenter, comment, date, _, _, _, _) = new
         with(binding) {
             newTitle.text = commenter
             newBody.text = comment
             timeAgo.text = date.formatTime()
             likeButton.isChecked = presenter.userHasLikedNew()
-            // TODO : avatar and likes could be used in other screens
         }
     }
 
@@ -52,11 +51,17 @@ class NewDetailsFragment : WolmoFragment<FragmentNewDetailBinding, NewDetailsPre
         binding.swipeRefresh.isRefreshing = false
     }
 
-    override fun showNoNetworkAlert() = toastFactory.show(R.string.connection_error)
+    override fun showNoNetworkAlert() {
+        toastFactory.show(R.string.connection_error)
+        binding.likeButton.isChecked = false
+    }
 
     override fun showLikeNewNotification() = toastFactory.show(R.string.like_new_notification)
 
-    override fun showWrongCredentialsAlert() = toastFactory.show(R.string.wrong_credentials_alert)
+    override fun showWrongCredentialsAlert() {
+        toastFactory.show(R.string.wrong_credentials_alert)
+        binding.likeButton.isChecked = false
+    }
 
     override fun toggleSpinnerVisibility(toggle: Boolean) = binding.newDetailsLoader.toggleVisibilityAnimation(toggle)
 

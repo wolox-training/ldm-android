@@ -1,102 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <LinearLayout
-            android:id="@+id/newDetailContainer"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/new_details_container_height"
-            android:background="@drawable/important"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageButton
-                    android:id="@+id/goBack"
-                    android:layout_width="@dimen/back_button_width"
-                    android:layout_height="@dimen/back_button_height"
-                    android:layout_marginStart="@dimen/static_spacing_medium"
-                    android:background="@color/transparent"
-                    android:src="@drawable/ic_baseline_arrow_back_24" />
-                <TextView
-                    android:id="@+id/goBackText"
-                    android:layout_marginStart="@dimen/spacing_medium"
-                    android:layout_marginTop="@dimen/static_spacing_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/font_huge"
-                    android:textColor="@color/fullWhite"
-                    android:text="@string/go_back"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ProgressBar
-                    android:visibility="gone"
-                    android:id="@+id/newDetailsLoader"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1" />
-            </LinearLayout>
-        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="@dimen/static_spacing_medium">
-            <TextView
-                android:id="@+id/timeAgo"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/newDetailContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:text=""
-                />
-            <TextView
-                android:id="@+id/newTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_more"
-                android:textStyle="bold"
-                android:textSize="@dimen/font_big"
-                android:text=""
-                android:textColor="@color/colorPrimary"
-                />
-            <TextView
-                android:id="@+id/newBody"
-                android:padding="@dimen/spacing_small"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                />
+                android:layout_height="@dimen/new_details_container_height"
+                android:background="@drawable/important"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/goBack"
+                        android:layout_width="@dimen/back_button_width"
+                        android:layout_height="@dimen/back_button_height"
+                        android:layout_marginStart="@dimen/static_spacing_medium"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_baseline_arrow_back_24" />
+
+                    <TextView
+                        android:id="@+id/goBackText"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginTop="@dimen/static_spacing_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/font_huge"
+                        android:textColor="@color/fullWhite"
+                        android:text="@string/go_back"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ProgressBar
+                        android:visibility="gone"
+                        android:id="@+id/newDetailsLoader"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_huge"
-                android:orientation="horizontal"
-                android:gravity="center"
-                >
-                <ToggleButton
-                    android:id="@+id/likeButton"
-                    android:layout_width="@dimen/like_button_width"
-                    android:layout_height="@dimen/like_button_height"
-                    android:textOff=""
-                    android:textOn=""
-                    android:background="@drawable/like_button_selector" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/static_spacing_medium">
+
+                <TextView
+                    android:id="@+id/timeAgo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text=""
+                    />
+                <TextView
+                    android:id="@+id/newTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_medium_more"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/font_big"
+                    android:text=""
+                    android:textColor="@color/colorPrimary"
+                    />
+                <TextView
+                    android:id="@+id/newBody"
+                    android:padding="@dimen/spacing_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_huge"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+
+                    <ToggleButton
+                        android:id="@+id/likeButton"
+                        android:layout_width="@dimen/like_button_width"
+                        android:layout_height="@dimen/like_button_height"
+                        android:textOff=""
+                        android:textOn=""
+                        android:background="@drawable/like_button_selector" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </layout>

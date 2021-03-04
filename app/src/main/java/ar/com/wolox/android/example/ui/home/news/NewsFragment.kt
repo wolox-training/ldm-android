@@ -29,17 +29,17 @@ class NewsFragment @Inject constructor() : WolmoFragment<FragmentNewsBinding, Ne
         super.setListeners()
         with(binding) {
             swipeRefresh.setOnRefreshListener {
-                presenter.updateNews(UpdateInvokeMethod.PULL_DOWN)
+                presenter.onUpdateNews(UpdateInvokeMethod.PULL_DOWN)
             }
             recyclerView.infiniteScroll {
-                presenter.updateNews(UpdateInvokeMethod.SCROLL)
+                presenter.onUpdateNews(UpdateInvokeMethod.SCROLL)
             }
         }
     }
 
-    fun updateLike(newId: Int) = presenter.updateLike(newId)
+    override fun onUpdateLike(newId: Int) = presenter.onUpdateLike(newId)
 
-    fun goToNewDetail(id: Int) = NewDetailsActivity.start(requireContext(), id)
+    override fun goToNewDetail(id: Int) = NewDetailsActivity.start(requireContext(), id)
 
     override fun disableSwipeRefreshLoader() {
         binding.swipeRefresh.isRefreshing = false

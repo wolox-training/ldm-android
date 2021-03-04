@@ -12,10 +12,9 @@ import ar.com.wolox.android.example.model.New
 import ar.com.wolox.android.example.utils.formatTime
 import kotlin.collections.ArrayList
 
-class NewsAdapter(dataSet: ArrayList<New>, newsFragment: NewsFragment) :
+class NewsAdapter(dataSet: ArrayList<New>, private val newsView: NewsView) :
         RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     private var news: ArrayList<New> = dataSet
-    private val fragment = newsFragment
 
     fun updateNews(newNews: ArrayList<New>) {
         news = newNews
@@ -31,7 +30,7 @@ class NewsAdapter(dataSet: ArrayList<New>, newsFragment: NewsFragment) :
         val image: ImageView = view.findViewById(R.id.newsImage)
         val timeAgo: TextView = view.findViewById(R.id.newsTimeAgo)
         val likeState: ToggleButton = view.findViewById(R.id.newsLikeButton)
-        var id: Int = -1 // Initialized in an arbitrary value, because it will be changed as soon the news load.
+        var id: Int = ID_START_VALUE
         // Define click listener for the ViewHolder's View.
         init {}
     }
@@ -49,20 +48,24 @@ class NewsAdapter(dataSet: ArrayList<New>, newsFragment: NewsFragment) :
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         news[position].also {
-            viewHolder.id = it.id!!
+            viewHolder.id = it.id
             viewHolder.commenter.text = it.commenter
             viewHolder.comment.text = it.comment
             viewHolder.timeAgo.text = it.date.formatTime()
-            viewHolder.likeState.isChecked = fragment.toggleLikeButton(it.likes)
+            viewHolder.likeState.isChecked = newsView.toggleLikeButton(it.likes)
         }
         viewHolder.itemView.setOnClickListener {
-            fragment.goToNewDetail(viewHolder.id)
+            newsView.goToNewDetail(viewHolder.id)
         }
         viewHolder.likeState.setOnClickListener {
-            fragment.updateLike(viewHolder.id)
+            newsView.onUpdateLike(viewHolder.id)
         }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = news.size
+
+    companion object {
+        const val ID_START_VALUE: Int = -1
+    }
 }

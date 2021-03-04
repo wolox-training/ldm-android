@@ -35,16 +35,16 @@ class NewsPresenter @Inject constructor(
                     news = it.page
                     news.sortByDescending { newDate -> newDate.date }
                     currentPage++
+                    view?.showNews(news)
                 }
                 onResponseFailed { _, _ -> view?.showWrongCredentialsAlert() }
                 onCallFailure { view?.showNoNetworkAlert() }
             }
-            view?.showNews(news)
             activeCoroutine = false
         }
     }
 
-    fun updateNews(updateInvokeMethod: UpdateInvokeMethod) = launch {
+    fun onUpdateNews(updateInvokeMethod: UpdateInvokeMethod) = launch {
         if (!activeCoroutine) {
             activeCoroutine = true
             if (currentPage <= totalPages) {
@@ -64,8 +64,8 @@ class NewsPresenter @Inject constructor(
             } else {
                 view?.showTotalPagesReachedAlert()
             }
-            view?.disableSwipeRefreshLoader()
             activeCoroutine = false
+            view?.disableSwipeRefreshLoader()
         }
     }
 
@@ -83,25 +83,25 @@ class NewsPresenter @Inject constructor(
                     totalPages = it!!.totalPages
                     news = it.page
                     currentPage++
+                    view?.updateNews(news)
                 }
                 onResponseFailed { _, _ -> view?.showWrongCredentialsAlert() }
                 onCallFailure { view?.showNoNetworkAlert() }
             }
-            view?.updateNews(news)
             activeCoroutine = false
         }
     }
 
-    fun updateLike(newId: Int) = launch {
+    fun onUpdateLike(newId: Int) = launch {
         if (!activeCoroutine) {
             activeCoroutine = true
             networkRequest(newRepository.updateLike(newId)) {
                 onResponseSuccessful {
                     view?.showLikeNewNotification()
-                    news.find {
+                    news.first {
                         it.id == newId
                     }.run {
-                        if (userSession.id in this!!.likes) {
+                        if (userSession.id in this.likes) {
                             this.likes.remove(userSession.id)
                         } else {
                             this.likes.add(userSession.id!!)
@@ -110,9 +110,11 @@ class NewsPresenter @Inject constructor(
                 }
                 onResponseFailed { _, _ -> view?.showWrongCredentialsAlert() }
                 onCallFailure { view?.showNoNetworkAlert() }
+                // The update is done here, since if the connection was refused, or the credentials failed
+                // the like button will be un-toggled, and the last saved state of the news will remain.
+                view?.updateNews(news)
             }
             activeCoroutine = false
-            view?.updateNews(news)
         }
     }
 
